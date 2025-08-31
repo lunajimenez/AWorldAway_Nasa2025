@@ -1,0 +1,6 @@
+{
+  "name": "@/source",
+  "version": "1.0.0",
+  "license": "ISC",
+  "packageManager": "pnpm@10.13.1"
+}
