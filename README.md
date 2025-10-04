@@ -1,8 +1,8 @@
 # AWorldAway_Nasa2025
 
-<p align="center">
-    <img src="./assets/images/ASTROBYTESUTB.png" alt="banner" />
-</p>
+<div align="center">
+    <img src="./assets/images/ASTROBYTESUTB.svg" alt="Project Banner" width=500 />
+</div>
 
 AI/ML app for NASA Space Apps Challenge 2025: “A World Away: Hunting for Exoplanets with AI”. We build an application using NASA’s open exoplanet datasets to analyze space mission data and automatically identify new exoplanets.
 

@@ -1,0 +1,29 @@
+{
+    "folders": [
+        {
+            "name": "ROOT",
+            "path": "../"
+        },
+        {
+            "name": "[ Package ] Analytics",
+            "path": "../packages/analytics"
+        },
+        {
+            "name": "[ App ] Web",
+            "path": "../apps/web"
+        },
+        {
+            "name": "[ App ] Server",
+            "path": "../apps/server"
+        }
+    ],
+    "settings": {
+        "files.exclude": {
+            "**/.git": true,
+            "**/.svn": true,
+            "**/.hg": true,
+            "**/.DS_Store": true,
+            "**/Thumbs.db": true
+        }
+    }
+}
