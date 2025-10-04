@@ -1,6 +1,13 @@
 {
-    // https://nuxt.com/docs/guide/concepts/typescript
-    "files": [],
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "~/*": ["./app/*"],
+            "@/*": ["./app/*"],
+            "~~/*": ["./*"],
+            "@@/*": ["./*"]
+        }
+    },
     "references": [
         {
             "path": "./.nuxt/tsconfig.app.json"
@@ -14,5 +21,6 @@
         {
             "path": "./.nuxt/tsconfig.node.json"
         }
-    ]
+    ],
+    "files": []
 }

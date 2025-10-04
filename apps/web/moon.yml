@@ -18,3 +18,9 @@ tasks:
             - --filter
             - "@source/apps-web"
         local: true
+
+    shadcn:
+        command: npx
+        args:
+            - shadcn-vue@latest
+        local: true
