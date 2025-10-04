@@ -1,9 +1,13 @@
 <script setup lang="ts">
+    import { Settings } from "lucide-vue-next";
+
     definePageMeta({
         title: "pages.home.title",
     });
 
     const { t } = useI18n({ useScope: "local" });
+    const modal = useModal();
+
     const mountReference = useTemplateRef("MountRef");
 </script>
 
@@ -21,17 +25,33 @@
                 <p class="text-sm opacity-80">{{ t("ui.subtitle") }}</p>
             </div>
 
-            <div class="col-start-9 col-span-4 row-start-1 row-span-1 flex pointer-events-auto">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic officiis porro debitis
-                voluptatum assumenda praesentium ducimus, quaerat eligendi explicabo quam
-                perferendis omnis sapiente sed voluptate accusantium rerum id quibusdam ea!
+            <div
+                class="col-start-9 col-span-4 row-start-1 row-span-2 pointer-events-auto flex items-start justify-end"
+            >
+                <Button
+                    @click="
+                        () => {
+                            modal.loadComponent({
+                                loader: () =>
+                                    import('@/components/common/settings/CommonSettingsModal.vue'),
+                                key: 'settings:modal',
+                            });
+
+                            modal.open.value = true;
+                        }
+                    "
+                >
+                    <Settings />
+                </Button>
             </div>
 
-            <div class="col-span-8 row-span-12 flex items-end pointer-events-auto">
-                <div class="bg-black/20 backdrop-blur-sm rounded-lg p-4 text-xs space-y-1">
-                    <p>🚀 {{ t("controls.shift") }}</p>
-                    <p>🔼 {{ t("controls.space") }}</p>
-                    <p>🌍 {{ t("controls.planet") }}</p>
+            <div
+                class="col-start-9 col-span-4 row-start-11 row-span-2 flex items-end justify-end pointer-events-auto"
+            >
+                <div class="p-4 text-xs space-y-1 text-right">
+                    <p>{{ t("controls.shift") }} 🚀</p>
+                    <p>{{ t("controls.space") }} 🔼</p>
+                    <p>{{ t("controls.planet") }} 🌍</p>
                 </div>
             </div>
         </div>
