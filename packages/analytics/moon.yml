@@ -10,5 +10,6 @@ project:
 tasks:
     uv:
         command: uv
+        local: true
         options:
             runFromWorkspaceRoot: false
