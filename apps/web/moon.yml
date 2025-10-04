@@ -1,0 +1,20 @@
+layer: application
+language: typescript
+
+project:
+    name: Web
+    description: Frontend layer for the application
+
+tasks:
+    nuxi:
+        command: npx
+        args:
+            - nuxi
+        local: true
+
+    pnpm:
+        command: pnpm
+        args:
+            - --filter
+            - "@source/apps-web"
+        local: true
