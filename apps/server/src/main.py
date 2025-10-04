@@ -1,20 +1,33 @@
-from fastapi import FastAPI
-from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
-from dotenv import load_dotenv
-from config import EnvConfig
-from utils import ROOTDIR
-from routes import router
 import datetime
+from contextlib import asynccontextmanager
+
+from dotenv import load_dotenv
+from fastapi import FastAPI
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
+
+from config import EnvConfig
+from routes import router
+from services import model_service
+from utils import LOGGING_CONFIG, ROOTDIR, logger
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    success = model_service.on_init()
+
+    if success:
+        logger.info("model loaded succesfully")
+
+    yield
+
 
 load_dotenv()
 settings = EnvConfig()
-app = FastAPI(debug=settings.debug)
-
+app = FastAPI(debug=settings.debug, lifespan=lifespan)
 app.mount(
     str((ROOTDIR / "assets").absolute()), StaticFiles(directory="assets"), name="assets"
 )
-
 app.include_router(router)
 
 
@@ -31,4 +44,10 @@ def favicon():
 if __name__ == "__main__":
     import uvicorn
 
-    uvicorn.run("main:app", host=settings.host, port=settings.port, reload=True)
+    uvicorn.run(
+        "main:app",
+        host=settings.host,
+        port=settings.port,
+        reload=True,
+        log_config=LOGGING_CONFIG,
+    )
