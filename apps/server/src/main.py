@@ -4,6 +4,7 @@ from fastapi.responses import FileResponse
 from dotenv import load_dotenv
 from config import EnvConfig
 from utils import ROOTDIR
+from routes import router
 import datetime
 
 load_dotenv()
@@ -13,6 +14,8 @@ app = FastAPI(debug=settings.debug)
 app.mount(
     str((ROOTDIR / "assets").absolute()), StaticFiles(directory="assets"), name="assets"
 )
+
+app.include_router(router)
 
 
 @app.get("/health")
