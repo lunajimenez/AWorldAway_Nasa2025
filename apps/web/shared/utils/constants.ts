@@ -4,4 +4,7 @@ export const CONSTANTS = {
             STORAGE_LENGTH: 3,
         },
     },
+    HOME: {
+        STARS_COUNT: 1000,
+    },
 } as const;

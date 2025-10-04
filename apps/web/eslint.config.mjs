@@ -16,7 +16,8 @@ export default withNuxt(
     {
         files: ["**/*.vue"],
         rules: {
-            "@stylistic/indent": ['error', 4],
+            "@stylistic/indent": ["error", 4],
+            "unicorn/number-literal-case": "off",
         },
     },
 );
