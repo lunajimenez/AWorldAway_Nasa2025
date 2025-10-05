@@ -1,3 +1,4 @@
+import type { Texture } from "three";
 import {
     AmbientLight,
     BufferAttribute,
@@ -15,7 +16,6 @@ import {
     Scene,
     SphereGeometry,
     Spherical,
-    Texture,
     Vector3,
     WebGLRenderer,
 } from "three";
@@ -290,7 +290,11 @@ export default function () {
         _camera.position.set(0, 0, 5);
         cameraReference.value = _camera;
 
-        const _renderer = new WebGLRenderer({ antialias: true });
+        const _renderer = new WebGLRenderer({
+            antialias: true,
+            powerPreference: "high-performance",
+            failIfMajorPerformanceCaveat: false,
+        });
         _renderer.setSize(window.innerWidth, window.innerHeight);
         _renderer.setClearColor(0x000011, 1);
         _renderer.shadowMap.enabled = true;
@@ -393,6 +397,7 @@ export default function () {
         const _ambientLight = new AmbientLight(0x404040, 0.3);
         _scene.add(_ambientLight);
 
+        // eslint-disable-next-line unicorn/number-literal-case
         const _directionalLight = new DirectionalLight(0xffffff, 1.2);
         _directionalLight.position.set(5, 3, 5);
         _directionalLight.castShadow = true;
@@ -400,6 +405,7 @@ export default function () {
         _directionalLight.shadow.mapSize.height = 2048;
         _scene.add(_directionalLight);
 
+        // eslint-disable-next-line unicorn/number-literal-case
         const _pointLight = new PointLight(0xffffff, 0.4, 100);
         _pointLight.position.set(-5, 5, 5);
         _scene.add(_pointLight);
