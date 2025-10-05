@@ -25,9 +25,7 @@ async def lifespan(app: FastAPI):
 load_dotenv()
 settings = EnvConfig()
 app = FastAPI(debug=settings.debug, lifespan=lifespan)
-app.mount(
-    str((ROOTDIR / "assets").absolute()), StaticFiles(directory="assets"), name="assets"
-)
+app.mount("/assets", StaticFiles(directory=ROOTDIR / "assets"), name="assets")
 app.include_router(router)
 
 

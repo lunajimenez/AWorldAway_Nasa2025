@@ -1,6 +1,6 @@
 import json
 from pathlib import Path
-from typing import Any, List
+from typing import Any, Dict, List
 
 from joblib import load  # type: ignore
 
@@ -13,8 +13,8 @@ class ModelService(object, metaclass=Singleton):
         return self.__model
 
     @property
-    def config(self) -> Any:
-        return self.__config
+    def config(self) -> Dict[str, Any]:
+        return self.__config or {}
 
     @property
     def feature_cols(self) -> List[str]:

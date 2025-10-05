@@ -2,3 +2,6 @@ $schema: https://moonrepo.dev/schemas/toolchain.json
 
 python:
     packageManager: uv
+
+node:
+    packageManager: pnpm

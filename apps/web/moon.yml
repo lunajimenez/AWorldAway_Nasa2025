@@ -24,3 +24,10 @@ tasks:
         args:
             - shadcn-vue@latest
         local: true
+
+    dev:
+        command: npx
+        args:
+            - nuxi
+            - dev
+        local: true
