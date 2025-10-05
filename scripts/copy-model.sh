@@ -7,10 +7,9 @@ GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m'
 
-
 echo -e "${GREEN}[ INFO ]${NC} init"
 
-SOURCE_DIR="packages/analytics/.output/model/"
+SOURCE_DIR="packages/analytics/.output/model"
 TARGET_DIR="apps/server/models/"
 
 mkdir -p "$TARGET_DIR"

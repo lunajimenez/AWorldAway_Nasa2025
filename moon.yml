@@ -12,7 +12,9 @@ tasks:
     copy-model:
         command: bash
         args:
-            - scripts/handle-model.sh
+            - scripts/copy-model.sh
+        deps:
+            - analytics:generate
         options:
             runFromWorkspaceRoot: true
             cache: false
@@ -20,7 +22,6 @@ tasks:
     prepare:
         command: noop
         deps:
-            - analytics:generate
             - source:copy-model
 
     deploy:
