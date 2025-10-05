@@ -89,12 +89,25 @@
         }),
     );
 
+    const ResponseSchema = z.object({
+        features_expected: z.array(z.string()),
+        threshold: z.coerce.number(),
+        input_received: z.record(z.string(), z.string()),
+        prediction: z.object({
+            dataset: z.string().nullable().optional(),
+            object_id: z.string().nullable().optional(),
+            pred_confirmed: z.coerce.number(),
+            score_confirmed: z.coerce.number(),
+        }),
+    });
+
     const { handleSubmit } = useForm({
         validationSchema: toTypedSchema(Schema.value),
         initialValues: Schema.value.parse({}),
     });
 
     const isLoading = ref(false);
+    const modal = useModal();
 
     const {
         public: { apiBase },
@@ -106,7 +119,23 @@
             baseURL: apiBase,
             query: values,
         })
-            .then((response) => console.log(response))
+            .then((response) => {
+                const { features_expected, prediction, threshold, input_received } =
+                    ResponseSchema.parse(response);
+
+                modal.loadComponent({
+                    loader: () => import("@/components/common/modal/CommonPredictionModal.vue"),
+                    key: "prediction:modal",
+                    props: {
+                        result: {
+                            input_received,
+                            features_expected,
+                            prediction,
+                            threshold,
+                        },
+                    },
+                });
+            })
             .catch((error) => console.error(error))
             .finally(() => (isLoading.value = false));
     });

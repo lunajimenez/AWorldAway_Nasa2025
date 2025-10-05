@@ -150,7 +150,27 @@
                 }
             },
             "success": "¡Predicción completada exitosamente!",
-            "error": "Error al procesar la predicción. Por favor intenta de nuevo."
+            "error": "Error al procesar la predicción. Por favor intenta de nuevo.",
+            "result": {
+                "title": "Resultado de la Predicción",
+                "description": "Análisis del candidato a exoplaneta basado en los parámetros proporcionados",
+                "confirmed": "Candidato a Exoplaneta Confirmado",
+                "not_confirmed": "Falso Positivo Detectado",
+                "confidence": "Nivel de Confianza",
+                "threshold": "Umbral de Detección",
+                "classification": "Clasificación",
+                "exoplanet": "Exoplaneta",
+                "false_positive": "Falso Positivo",
+                "analysis_details": "Detalles del Análisis",
+                "input_parameters": "Ver Parámetros de Entrada",
+                "interpretation": {
+                    "title": "Interpretación",
+                    "high": "Alta confianza de que este es un exoplaneta genuino. Las características coinciden fuertemente con exoplanetas confirmados.",
+                    "medium": "Confianza moderada. Puede ser necesaria más observación y análisis para confirmar este candidato.",
+                    "low": "Baja confianza. Las características de la señal sugieren que probablemente se trata de un falso positivo o artefacto instrumental."
+                },
+                "close": "Cerrar"
+            }
         }
     }
 }

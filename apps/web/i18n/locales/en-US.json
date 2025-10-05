@@ -150,7 +150,27 @@
                 }
             },
             "success": "Prediction completed successfully!",
-            "error": "Error processing prediction. Please try again."
+            "error": "Error processing prediction. Please try again.",
+            "result": {
+                "title": "Prediction Result",
+                "description": "Analysis of exoplanet candidate based on the provided parameters",
+                "confirmed": "Exoplanet Candidate Confirmed",
+                "not_confirmed": "False Positive Detected",
+                "confidence": "Confidence Score",
+                "threshold": "Detection Threshold",
+                "classification": "Classification",
+                "exoplanet": "Exoplanet",
+                "false_positive": "False Positive",
+                "analysis_details": "Analysis Details",
+                "input_parameters": "View Input Parameters",
+                "interpretation": {
+                    "title": "Interpretation",
+                    "high": "High confidence that this is a genuine exoplanet. The characteristics strongly match confirmed exoplanets.",
+                    "medium": "Moderate confidence. Further observation and analysis may be needed to confirm this candidate.",
+                    "low": "Low confidence. The signal characteristics suggest this is likely a false positive or instrumental artifact."
+                },
+                "close": "Close"
+            }
         }
     }
 }
