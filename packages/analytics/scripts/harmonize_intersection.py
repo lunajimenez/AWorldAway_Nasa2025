@@ -253,7 +253,7 @@ koi_final = ensure_cols(koi_clean)
 k2_final = ensure_cols(k2_clean)
 toi_final = ensure_cols(toi_clean)
 
-harm = pd.concat([koi_final, k2_final, toi_final], ignore_index=True)
+harm = pd.concat([koi_final, toi_final], ignore_index=True) #sin tomar en cuenta a K2
 print("\nHarmonized shape:", harm.shape)
 print(harm["final_disposition"].value_counts(dropna=False))
 harm.to_csv(OUT_FP, index=False)

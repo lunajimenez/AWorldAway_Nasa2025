@@ -1,0 +1,21 @@
+FEATURE IMPORTANCES
+============================================================
+  1. stellar_temperature_K               32370.000000
+  2. transit_duration_hours              32073.000000
+  3. depth_discrepancy                   30122.000000
+  4. duration_period_ratio               29019.000000
+  5. stellar_radius_solar                28299.000000
+  6. orbital_period_days                 22635.000000
+  7. planet_radius_earth                 21741.000000
+  8. equilibrium_temperature_K           21412.000000
+  9. transit_depth_ppm                   18469.000000
+ 10. insolation_flux_Earth               18277.000000
+ 11. planet_star_radius_ratio            17532.000000
+ 12. log_planet_radius_earth             8559.000000
+ 13. log_orbital_period_days             7483.000000
+ 14. log_transit_depth_ppm               5618.000000
+ 15. transit_depth_theoretical           4412.000000
+ 16. source_mission_TESS                 1376.000000
+ 17. planet_size_category                389.000000
+ 18. in_habitable_zone                   43.000000
+ 19. temp_category                       39.000000
