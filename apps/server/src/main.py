@@ -3,7 +3,7 @@ from contextlib import asynccontextmanager
 
 from dotenv import load_dotenv
 from fastapi import FastAPI
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 
 from config import EnvConfig
@@ -31,7 +31,23 @@ app.include_router(router)
 
 @app.get("/health")
 def health():
-    return {"status": "healthy", "timestamp": datetime.datetime.now().isoformat()}
+    ok = (
+        model_service.is_loaded
+        and model_service.model is not None
+        and len(model_service.feature_cols) > 0
+    )
+
+    return JSONResponse(
+        {
+            "ok": ok,
+            "model_loaded": model_service.is_loaded,
+            "features_count": len(model_service.feature_cols),
+            "features": model_service.feature_cols,
+            "metrics": model_service.metrics,
+            "timestamp": datetime.datetime.now().isoformat(),
+        },
+        status_code=200 if ok else 503,
+    )
 
 
 @app.get("/favicon.ico")

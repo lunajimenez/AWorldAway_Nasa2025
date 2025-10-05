@@ -4,7 +4,7 @@ from typing import Any, Dict, List, Optional, Tuple
 
 import numpy as np
 import pandas as pd
-from fastapi import APIRouter
+from fastapi import APIRouter, Request
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field
 
@@ -83,8 +83,10 @@ def predict_params(request: PredictRequest):
     )
 
 
-@router.post("/predict-one")
-def predict_one(**query: Dict[str, Any]):
+@router.get("/predict-one")
+def predict_one(request: Request):
+    query = dict(request.query_params)
+
     if not model_service.is_loaded or len(model_service.feature_cols) == 0:
         return JSONResponse({"error": "model is not loaded yet"}, status_code=500)
 

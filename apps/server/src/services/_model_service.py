@@ -20,6 +20,10 @@ class ModelService(object, metaclass=Singleton):
     def feature_cols(self) -> List[str]:
         return self.__feature_cols
 
+    @property
+    def metrics(self) -> Any:
+        return self.__metrics
+
     def __init__(self) -> None:
         self.__model = None
         self.__config = None
@@ -37,7 +41,13 @@ class ModelService(object, metaclass=Singleton):
 
             self.__model = load(model_path)
             self.__config = json.loads(config_path.read_text(encoding="utf-8"))
-            self.__feature_cols = self.__config.get("feature_columns", [])
+
+            self.__numeric_columns = self.__config.get("numeric_columns", [])
+            self.__categorical_columns = self.__config.get("categorical_columns", [])
+            self.__feature_cols = self.__numeric_columns + self.__categorical_columns
+
+            self.__metrics = self.__config.get("metrics", {})
+
             self.is_loaded = True
 
             return True
