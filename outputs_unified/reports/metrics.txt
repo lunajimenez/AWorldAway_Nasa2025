@@ -1,0 +1,15 @@
+============================================================
+EXOPLANET CLASSIFICATION - FINAL RESULTS
+============================================================
+                precision    recall  f1-score   support
+
+     CANDIDATE     0.7009    0.7315    0.7159      1352
+     CONFIRMED     0.6675    0.6985    0.6826       796
+FALSE_POSITIVE     0.6826    0.5946    0.6356       745
+
+      accuracy                         0.6872      2893
+     macro avg     0.6837    0.6749    0.6780      2893
+  weighted avg     0.6870    0.6872    0.6861      2893
+
+Balanced Accuracy: 0.6749
+ROC-AUC: 0.8419

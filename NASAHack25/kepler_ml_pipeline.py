@@ -1,31 +1,21 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Kepler KOI ML Pipeline (Hackathon-ready)
-----------------------------------------
-- Loads KOI table (CSV)
-- Selects physically meaningful features
-- Handles missing values
-- Encodes labels (multi-class or binary)
-- Cross-validation (StratifiedKFold) for F1-macro
-- Trains classifier (LightGBM if available, else RandomForest)
-- Evaluates on holdout test set
-- Saves metrics and plots (feature importances, confusion matrix)
-
-Usage:
-    python kepler_ml_pipeline.py --csv path/to/kepler.csv [--binary] [--positive CONFIRMED] [--smote]
+Kepler KOI ML Pipeline (Hackathon-ready) - v2 robust I/O - SIN IMPUTER
+------------------------------------------------------------------------
+Para datos ya limpios (sin valores faltantes)
 """
 import argparse
 import os
 import sys
 from typing import List, Tuple, Optional
+import joblib
 
 import numpy as np
 import pandas as pd
 
 from sklearn.model_selection import train_test_split, StratifiedKFold, cross_val_score
 from sklearn.preprocessing import LabelEncoder
-from sklearn.impute import SimpleImputer
 from sklearn.metrics import (
     classification_report,
     confusion_matrix,
@@ -55,28 +45,28 @@ import matplotlib.pyplot as plt
 
 FEATURES_BASE = [
     # Transit/orbital parameters
-    "koi_period",       # Orbital Period [days]
-    "koi_impact",       # Impact Parameter
-    "koi_duration",     # Transit Duration [hrs]
-    "koi_depth",        # Transit Depth [ppm]
-    "koi_model_snr",    # Transit Signal-to-Noise
+    "koi_period",       
+    "koi_impact",       
+    "koi_duration",     
+    "koi_depth",        
+    "koi_model_snr",    
 
     # Planet properties (derived)
-    "koi_prad",         # Planetary Radius [Earth radii]
-    "koi_teq",          # Equilibrium Temperature [K]
-    "koi_insol",        # Insolation Flux [Earth flux]
+    "koi_prad",         
+    "koi_teq",          
+    "koi_insol",        
 
     # Stellar properties
-    "koi_steff",        # Stellar Effective Temperature [K]
-    "koi_slogg",        # Stellar Surface Gravity [log10(cm/s**2)]
-    "koi_srad",         # Stellar Radius [Solar radii]
-    "koi_kepmag",       # Kepler-band [mag]
+    "koi_steff",        
+    "koi_slogg",        
+    "koi_srad",         
+    "koi_kepmag",       
 ]
 
 ID_COLS = ["kepid", "kepoi_name", "kepler_name", "koi_tce_delivname", "ra", "dec"]
 FLAG_COLS = ["koi_fpflag_nt", "koi_fpflag_ss", "koi_fpflag_co", "koi_fpflag_ec"]
 
-TARGET_DEFAULT = "koi_disposition"  # 'CONFIRMED', 'CANDIDATE', 'FALSE POSITIVE'
+TARGET_DEFAULT = "koi_pdisposition"
 
 
 def ensure_dirs(paths: List[str]) -> None:
@@ -95,27 +85,93 @@ def maybe_binary_labels(y: pd.Series, positive_label: str) -> pd.Series:
     return (y == positive_label).astype(int)
 
 
+def read_table(path: str, sep: Optional[str], on_bad_lines: str = "error") -> pd.DataFrame:
+    """Robust reader with auto-detection"""
+    tried = []
+
+    def _try(**kw):
+        tried.append(str(kw))
+        return pd.read_csv(path, **kw)
+
+    # 1) explicit sep from CLI
+    if sep is not None:
+        try:
+            df = _try(sep=sep, on_bad_lines=on_bad_lines)
+            print(f"[INFO] Read OK with sep='{sep}' and on_bad_lines='{on_bad_lines}'")
+            return df
+        except Exception as e:
+            print(f"[WARN] Failed with sep='{sep}': {e}", file=sys.stderr)
+
+    # 2) default (comma)
+    try:
+        df = _try(on_bad_lines=on_bad_lines)
+        print(f"[INFO] Read OK with default comma and on_bad_lines='{on_bad_lines}'")
+        return df
+    except Exception as e:
+        print(f"[WARN] Default comma failed: {e}", file=sys.stderr)
+
+    # 3) auto-detect (python engine)
+    try:
+        df = _try(sep=None, engine="python", on_bad_lines=on_bad_lines)
+        print(f"[INFO] Read OK with sep=None (auto) + engine='python'")
+        return df
+    except Exception as e:
+        print(f"[WARN] Auto-detect failed: {e}", file=sys.stderr)
+
+    # 4) common alternatives
+    for alt in ["\t", ";", "|"]:
+        try:
+            df = _try(sep=alt, engine="python", on_bad_lines=on_bad_lines)
+            name = {"\t": "\\t", ";": ";", "|": "|"}[alt]
+            print(f"[INFO] Read OK with sep='{name}'")
+            return df
+        except Exception as e:
+            print(f"[WARN] sep '{alt}' failed: {e}", file=sys.stderr)
+
+    # 5) last resort: skip bad lines
+    if on_bad_lines != "skip":
+        try:
+            df = _try(sep=None, engine="python", on_bad_lines="skip")
+            print("[INFO] Read OK with on_bad_lines='skip' (last resort)")
+            return df
+        except Exception as e:
+            print(f"[ERROR] All read attempts failed. Tried: {tried}", file=sys.stderr)
+            raise
+
+    print(f"[ERROR] Could not read file: {path}", file=sys.stderr)
+    raise RuntimeError("Failed to parse table")
+
+
 def load_and_prepare(
     csv_path: str,
     target_col: str,
     use_binary: bool,
     positive_label: str,
     extra_features: Optional[List[str]] = None,
-) -> Tuple[pd.DataFrame, pd.Series, List[str]]:
-    df = pd.read_csv(csv_path)
+    sep: Optional[str] = None,
+    on_bad_lines: str = "error",
+) -> Tuple[pd.DataFrame, pd.Series, List[str], List[str]]:
+    df = read_table(csv_path, sep=sep, on_bad_lines=on_bad_lines)
     print(f"[INFO] Loaded data shape: {df.shape}")
+
+    # Quick sanity check
+    if df.shape[1] == 1 and df.columns[0].endswith(".py"):
+        print("[ERROR] It looks like you passed a Python script instead of a CSV/TSV.", file=sys.stderr)
+        raise SystemExit(2)
 
     # Build feature list
     features = FEATURES_BASE.copy()
     if extra_features:
         features += extra_features
 
-    # Drop obviously problematic or leakage-prone columns
+    # Drop ID and flag columns
     drop_cols = [c for c in (ID_COLS + FLAG_COLS) if c in df.columns]
     if drop_cols:
         df = df.drop(columns=drop_cols)
 
     # Keep only selected features + target
+    if target_col not in df.columns:
+        raise KeyError(f"Target column '{target_col}' not found. Available: {list(df.columns)[:30]}")
     keep_cols = pick_existing_features(df, features) + [target_col]
     df = df[keep_cols].copy()
 
@@ -125,16 +181,11 @@ def load_and_prepare(
 
     # Binary option
     if use_binary:
-        # Map positive class vs all others
         y = maybe_binary_labels(y, positive_label)
         classes_info = f"Binary task: positive='{positive_label}', negative='others'"
     else:
         classes_info = f"Multiclass task with classes: {sorted(pd.unique(y))}"
     print(f"[INFO] {classes_info}")
-
-    # Impute missing values (median - robust for skewed distributions)
-    imputer = SimpleImputer(strategy="median")
-    X_imp = pd.DataFrame(imputer.fit_transform(X), columns=X.columns)
 
     # Encode labels if multiclass
     if not use_binary:
@@ -145,7 +196,10 @@ def load_and_prepare(
         y_enc = y.values
         class_names = ["negative", "positive"]
 
-    return X_imp, pd.Series(y_enc), class_names
+    # NOTA: Asumimos que los datos ya están limpios (sin NaN)
+    print(f"[INFO] Data ready. Shape: {X.shape}")
+    
+    return X, pd.Series(y_enc), class_names, list(X.columns)
 
 
 def build_model(random_state: int = 42):
@@ -209,8 +263,6 @@ def train_and_evaluate(
 
     # Predict
     y_pred = model.predict(X_test)
-
-    # Probabilities (if available)
     has_proba = hasattr(model, "predict_proba")
     y_proba = model.predict_proba(X_test) if has_proba else None
 
@@ -220,7 +272,7 @@ def train_and_evaluate(
     print("\n[TEST] Classification report:\n", rep)
     print(f"[TEST] Balanced accuracy: {bal_acc:.4f}")
 
-    # ROC-AUC (multi-class OVR) if we have probabilities and >2 classes
+    # ROC-AUC
     roc_msg = ""
     try:
         if y_proba is not None:
@@ -244,7 +296,7 @@ def train_and_evaluate(
             f.write(roc_msg + "\n")
     print(f"[INFO] Saved metrics to: {report_path}")
 
-    # Confusion matrix plot (matplotlib only; single plot; no explicit colors)
+    # Confusion matrix plot
     cm = confusion_matrix(y_test, y_pred, labels=list(range(len(class_names))))
     fig_cm = plt.figure(figsize=(6, 5))
     ax = fig_cm.add_subplot(111)
@@ -265,7 +317,7 @@ def train_and_evaluate(
     plt.close(fig_cm)
     print(f"[INFO] Saved confusion matrix to: {cm_path}")
 
-    # Feature importances (matplotlib only; single plot; no explicit colors)
+    # Feature importances
     try:
         importances = getattr(model, "feature_importances_", None)
         if importances is None:
@@ -291,39 +343,42 @@ def train_and_evaluate(
             print(f"  {rank+1:2d}. {X.columns[idx]}  ({importances[idx]:.4f})")
     except Exception as e:
         print(f"[WARN] Could not plot importances: {e}", file=sys.stderr)
+    
+    return model
 
 
 def parse_args():
-    p = argparse.ArgumentParser(description="Kepler KOI ML Pipeline")
-    p.add_argument("--csv", required=True, help="Path to KOI CSV file")
+    p = argparse.ArgumentParser(description="Kepler KOI ML Pipeline - SIN IMPUTER")
+    p.add_argument("--csv", required=True, help="Path to KOI CSV/TSV file")
     p.add_argument("--target", default=TARGET_DEFAULT, help=f"Target column (default: {TARGET_DEFAULT})")
-    p.add_argument("--binary", action="store_true", help="Use binary classification (positive vs others)")
-    p.add_argument("--positive", default="CONFIRMED", help="Positive label for binary (default: CONFIRMED)")
-    p.add_argument("--smote", action="store_true", help="Apply SMOTE to training data (requires imblearn)")
-    p.add_argument("--test_size", type=float, default=0.2, help="Test size fraction (default: 0.2)")
-    p.add_argument("--outdir", default="outputs", help="Output directory (default: outputs)")
+    p.add_argument("--binary", action="store_true", help="Binary classification")
+    p.add_argument("--positive", default="CONFIRMED", help="Positive label for binary")
+    p.add_argument("--smote", action="store_true", help="Apply SMOTE")
+    p.add_argument("--test_size", type=float, default=0.2, help="Test size fraction")
+    p.add_argument("--outdir", default="outputs", help="Output directory")
+    p.add_argument("--sep", default=None, help="Field separator")
+    p.add_argument("--on_bad_lines", default="error", choices=["error", "warn", "skip"])
     return p.parse_args()
 
 
 def main():
     args = parse_args()
-    X, y, class_names = load_and_prepare(
+    X, y, class_names, feature_names = load_and_prepare(
         csv_path=args.csv,
         target_col=args.target,
         use_binary=args.binary,
         positive_label=args.positive,
-        extra_features=None,  # Add extra numeric columns if desired
+        extra_features=None,
+        sep=args.sep,
+        on_bad_lines=args.on_bad_lines,
     )
 
-    # Model (LightGBM if available, else RF)
     model = build_model(random_state=42)
 
-    # Cross-validation on full dataset (before holdout training)
     print("[INFO] Cross-validating model (F1-macro, 5-fold)...")
     cross_validate_model(model, X, y, folds=5)
 
-    # Train/test and evaluate, saving outputs
-    train_and_evaluate(
+    fitted_model = train_and_evaluate(
         model=model,
         X=X,
         y=y,
@@ -333,6 +388,19 @@ def main():
         outdir=args.outdir,
         random_state=42,
     )
+
+    # Guardar modelo
+    bundle = {
+        "model": fitted_model,
+        "features": feature_names,
+        "class_names": class_names,
+        "target": args.target,
+        "binary": args.binary,
+        "positive_label": args.positive,
+    }
+    model_path = os.path.join(args.outdir, "kepler_koi_model.joblib")
+    joblib.dump(bundle, model_path)
+    print(f"[INFO] Saved model bundle to: {model_path}")
 
 
 if __name__ == "__main__":
