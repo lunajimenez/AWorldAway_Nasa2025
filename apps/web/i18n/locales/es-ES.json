@@ -35,7 +35,49 @@
                     "data_scientist": "Científico de Datos",
                     "frontend_developer": "Desarrollador Frontend",
                     "fullstack_developer": "Desarrollador Fullstack"
+                },
+                "members": {
+                    "luna": {
+                        "bio": {
+                            "p1": "Soy Luna, Líder de Equipo y Científica de Datos con pasión por la investigación de exoplanetas. Lidero nuestra misión a través del análisis de datos y modelos ML innovadores.",
+                            "p2": "Especializada en armonizar datasets de NASA y construir pipelines de predicción que ayudan a descubrir nuevos mundos más allá de nuestro sistema solar.",
+                            "p3": "Dedicada a hacer la exploración espacial accesible mediante tecnología y compartir conocimiento con futuras generaciones de científicos."
+                        }
+                    },
+                    "cami": {
+                        "bio": {
+                            "p1": "Soy María Camila, Científica de Datos enfocada en reconocimiento de patrones astronómicos. Transformo datos cósmicos en insights accionables.",
+                            "p2": "Experta en ingeniería de características y optimización de modelos, asegurando que nuestras predicciones sean precisas e interpretables.",
+                            "p3": "Apasionada por cerrar la brecha entre algoritmos complejos y descubrimientos espaciales del mundo real."
+                        }
+                    },
+                    "leo": {
+                        "bio": {
+                            "p1": "Soy Leonardo, Desarrollador Frontend creando interfaces intuitivas para visualización de datos espaciales. Haciendo el cosmos accesible a través del diseño.",
+                            "p2": "Especializado en visualización 3D con Three.js y construcción de experiencias responsive que dan vida a los exoplanetas.",
+                            "p3": "Comprometido con la experiencia de usuario y hacer que los datos espaciales complejos sean hermosos y fáciles de entender."
+                        }
+                    },
+                    "maic": {
+                        "bio": {
+                            "p1": "Soy Michael, pero mis amigos me llaman Maic. Científico de Datos enfocado en desarrollo y optimización de modelos ML.",
+                            "p2": "Construyendo sistemas de predicción robustos usando LightGBM y scikit-learn para identificar candidatos potenciales a exoplanetas.",
+                            "p3": "Contribuyendo a proyectos open source y ayudando a la comunidad a avanzar en machine learning y tecnología espacial."
+                        }
+                    },
+                    "mau": {
+                        "bio": {
+                            "p1": "Soy Mauro, Desarrollador Fullstack y Científico de Datos. Construyendo el puente entre pipelines de datos e interfaces de usuario.",
+                            "p2": "Experto en crear sistemas escalables con FastAPI y Nuxt, asegurando que nuestra plataforma funcione a velocidades estelares.",
+                            "p3": "Entusiasta de DevOps automatizando despliegues y asegurando que nuestras herramientas de exploración espacial estén siempre disponibles."
+                        }
+                    }
                 }
+            },
+            "carousel": {
+                "previous": "Miembro anterior",
+                "next": "Siguiente miembro",
+                "goTo": "Ir a"
             }
         }
     }
