@@ -290,8 +290,6 @@ export default function () {
 
         const _renderer = new WebGLRenderer({
             antialias: true,
-            powerPreference: "high-performance",
-            failIfMajorPerformanceCaveat: false,
         });
         _renderer.setSize(window.innerWidth, window.innerHeight);
         _renderer.setClearColor(0x000011, 1);

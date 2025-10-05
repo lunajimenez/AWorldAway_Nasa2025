@@ -71,27 +71,18 @@
                     <Pointer />
                     <RotateCcw />
                 </Button>
-                <Button
-                    @click="
-                        () => {
-                            modal.loadComponent({
-                                loader: () =>
-                                    import(
-                                        '~/components/common/settings/modal/CommonSettingsModal.vue'
-                                    ),
-                                key: 'settings:modal',
-                            });
 
-                            modal.open.value = true;
-                        }
-                    "
-                >
-                    <Settings />
-                </Button>
+                <CommonSettingsLocale />
 
                 <Button variant="link" as-child>
                     <NuxtLink :to="$localeRoute({ path: '/about' })">
                         {{ $t("pages.about.title") }}
+                    </NuxtLink>
+                </Button>
+
+                <Button variant="link" as-child>
+                    <NuxtLink :to="$localeRoute({ path: '/metrics' })">
+                        {{ $t("pages.metrics.title") }}
                     </NuxtLink>
                 </Button>
             </div>

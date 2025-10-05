@@ -159,24 +159,7 @@
                 {{ $t("pages.about.navigation.back") }}
             </NuxtLink>
 
-            <Button
-                @click="
-                    () => {
-                        modal.loadComponent({
-                            loader: () =>
-                                import(
-                                    '@/components/common/settings/modal/CommonSettingsModal.vue'
-                                ),
-                            key: 'settings:modal',
-                        });
-                        modal.open.value = true;
-                    }
-                "
-                variant="ghost"
-                size="icon"
-            >
-                <Settings :size="20" />
-            </Button>
+            <CommonSettingsLocale />
         </nav>
 
         <!-- Content -->

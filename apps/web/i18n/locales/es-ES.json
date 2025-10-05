@@ -171,6 +171,9 @@
                 },
                 "close": "Cerrar"
             }
+        },
+        "metrics": {
+            "title": "Metricas"
         }
     }
 }
