@@ -326,12 +326,12 @@ The entire pipeline is orchestrated by **moonrepo** and runs with a single comma
 
 ## 👥 Team
 
-**AstroBytes UTB** - Universidad Tecnológica de Bolívar
+**StardustCrusaders** - Universidad Tecnológica de Bolívar
 
 -   **Luna Jiménez** - Team Leader & Data Scientist
--   **Cristian Acosta** - Frontend Developer
--   **Anyelo Cardenas** - Data Engineer
--   **Maikol Guzman** - ML Engineer
+-   **Leonardo González** - Data Scientist & Hardware Developer
+-   **Maria García** - Data Scientist & Backend Developer
+-   **Michael Taboada** - Data Scientist & Backend Developer
 -   **Mauro Gonzalez** - Fullstack Developer & Data Scientist
 
 ---
