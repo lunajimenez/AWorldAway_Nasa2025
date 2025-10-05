@@ -79,6 +79,78 @@
                 "next": "Next member",
                 "goTo": "Go to"
             }
+        },
+        "predict": {
+            "form": {
+                "sections": {
+                    "orbital": "Orbital Characteristics",
+                    "planet": "Planet Properties",
+                    "transit": "Transit Signal",
+                    "stellar": "Stellar Properties",
+                    "mission": "Mission Data"
+                },
+                "fields": {
+                    "orbital_period": {
+                        "label": "Orbital Period",
+                        "placeholder": "e.g., 365.25",
+                        "description": "Time for one complete orbit (in days)"
+                    },
+                    "transit_duration": {
+                        "label": "Transit Duration",
+                        "placeholder": "e.g., 13.5",
+                        "description": "Duration of the transit event (in hours)"
+                    },
+                    "planet_radius": {
+                        "label": "Planet Radius",
+                        "placeholder": "e.g., 1.0",
+                        "description": "Radius in Earth radii (R⊕)"
+                    },
+                    "equilibrium_temp": {
+                        "label": "Equilibrium Temperature",
+                        "placeholder": "e.g., 288",
+                        "description": "Planet's equilibrium temperature (in Kelvin)"
+                    },
+                    "transit_depth": {
+                        "label": "Transit Depth",
+                        "placeholder": "e.g., 84",
+                        "description": "Transit depth in parts per million (ppm)"
+                    },
+                    "insolation_flux": {
+                        "label": "Insolation Flux",
+                        "placeholder": "e.g., 1.0",
+                        "description": "Stellar flux received by the planet (S⊕)"
+                    },
+                    "stellar_radius": {
+                        "label": "Stellar Radius",
+                        "placeholder": "e.g., 1.0",
+                        "description": "Host star radius in solar radii (R☉)"
+                    },
+                    "stellar_temp": {
+                        "label": "Stellar Temperature",
+                        "placeholder": "e.g., 5778",
+                        "description": "Host star effective temperature (in Kelvin)"
+                    },
+                    "source_mission": {
+                        "label": "Source Mission",
+                        "placeholder": "Select a mission",
+                        "description": "Space telescope mission that discovered the candidate"
+                    }
+                },
+                "missions": {
+                    "kepler": "Kepler",
+                    "k2": "K2",
+                    "tess": "TESS"
+                },
+                "submit": "Predict Confirmation",
+                "validation": {
+                    "required": "This field is required",
+                    "positive_number": "Must be a positive number",
+                    "stellar_temp_min": "Stellar temperature must be at least 1000 K",
+                    "select_mission": "Please select a mission"
+                }
+            },
+            "success": "Prediction completed successfully!",
+            "error": "Error processing prediction. Please try again."
         }
     }
 }

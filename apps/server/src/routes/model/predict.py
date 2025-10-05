@@ -85,31 +85,53 @@ def predict_params(request: PredictRequest):
 
 @router.get("/predict-one")
 def predict_one(request: Request):
-    query = dict(request.query_params)
+    """
+    Predicción individual usando query parameters.
 
-    if not model_service.is_loaded or len(model_service.feature_cols) == 0:
-        return JSONResponse({"error": "model is not loaded yet"}, status_code=500)
+    Query params:
+    - orbital_period_days: float
+    - transit_duration_hours: float
+    - transit_depth_ppm: float
+    - planet_radius_earth: float
+    - equilibrium_temperature_K: float
+    - insolation_flux_Earth: float
+    - stellar_radius_solar: float
+    - stellar_temperature_K: float
+    - source_mission: str (Kepler, K2, TESS)
+    """
 
-    item = {
-        k: (float(v) if k in model_service.feature_cols else v)
-        for k, v in query.items()
-    }
+    if not model_service.is_loaded:
+        return JSONResponse(
+            {"error": "Model not loaded", "loaded": False}, status_code=503
+        )
 
-    X, meta_df = _rows_from_items([item])
-    prob = model_service.model.predict_proba(X)[:, 1]
-    threshold = float(model_service.config.get("threshold", 0.5))
-    prediction = (prob >= threshold).astype(int)
+    try:
+        params = dict(request.query_params)
 
-    return JSONResponse(
-        {
-            "threshold": threshold,
-            "features_expected": model_service.feature_cols,
-            "input_received": item,
-            "prediction": {
-                **meta_df.iloc[0].to_dict(),
-                "score_confirmed": prob,
-                "prediction_confirmed": prediction,
+        if "source_mission" not in params:
+            params["source_mission"] = "Kepler"
+
+        features = {k: v for k, v in params.items() if k in model_service.feature_cols}
+
+        df = pd.DataFrame([features])
+
+        score = model_service.model.predict_proba(df)[0][1]
+        prediction = int(score >= model_service.threshold)
+
+        return JSONResponse(
+            {
+                "threshold": model_service.threshold,
+                "features_expected": model_service.feature_cols,
+                "input_received": params,
+                "prediction": {
+                    "score_confirmed": float(score),
+                    "pred_confirmed": prediction,
+                },
             },
-        },
-        status_code=200,
-    )
+            status_code=200,
+        )
+
+    except ValueError as ve:
+        return JSONResponse({"error": f"Validation error: {str(ve)}"}, status_code=400)
+    except Exception as e:
+        return JSONResponse({"error": f"Prediction failed: {str(e)}"}, status_code=500)

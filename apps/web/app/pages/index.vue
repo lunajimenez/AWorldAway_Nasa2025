@@ -90,7 +90,9 @@
                 </Button>
 
                 <Button variant="link" as-child>
-                    <NuxtLink to="/about"> {{ $t("pages.about.title") }} </NuxtLink>
+                    <NuxtLink :to="$localeRoute({ path: '/about' })">
+                        {{ $t("pages.about.title") }}
+                    </NuxtLink>
                 </Button>
             </div>
 

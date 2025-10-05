@@ -79,6 +79,78 @@
                 "next": "Siguiente miembro",
                 "goTo": "Ir a"
             }
+        },
+        "predict": {
+            "form": {
+                "sections": {
+                    "orbital": "Características Orbitales",
+                    "planet": "Propiedades del Planeta",
+                    "transit": "Señal de Tránsito",
+                    "stellar": "Propiedades Estelares",
+                    "mission": "Datos de Misión"
+                },
+                "fields": {
+                    "orbital_period": {
+                        "label": "Período Orbital",
+                        "placeholder": "ej., 365.25",
+                        "description": "Tiempo para una órbita completa (en días)"
+                    },
+                    "transit_duration": {
+                        "label": "Duración del Tránsito",
+                        "placeholder": "ej., 13.5",
+                        "description": "Duración del evento de tránsito (en horas)"
+                    },
+                    "planet_radius": {
+                        "label": "Radio del Planeta",
+                        "placeholder": "ej., 1.0",
+                        "description": "Radio en radios terrestres (R⊕)"
+                    },
+                    "equilibrium_temp": {
+                        "label": "Temperatura de Equilibrio",
+                        "placeholder": "ej., 288",
+                        "description": "Temperatura de equilibrio del planeta (en Kelvin)"
+                    },
+                    "transit_depth": {
+                        "label": "Profundidad del Tránsito",
+                        "placeholder": "ej., 84",
+                        "description": "Profundidad del tránsito en partes por millón (ppm)"
+                    },
+                    "insolation_flux": {
+                        "label": "Flujo de Insolación",
+                        "placeholder": "ej., 1.0",
+                        "description": "Flujo estelar recibido por el planeta (S⊕)"
+                    },
+                    "stellar_radius": {
+                        "label": "Radio Estelar",
+                        "placeholder": "ej., 1.0",
+                        "description": "Radio de la estrella anfitriona en radios solares (R☉)"
+                    },
+                    "stellar_temp": {
+                        "label": "Temperatura Estelar",
+                        "placeholder": "ej., 5778",
+                        "description": "Temperatura efectiva de la estrella (en Kelvin)"
+                    },
+                    "source_mission": {
+                        "label": "Misión de Origen",
+                        "placeholder": "Selecciona una misión",
+                        "description": "Telescopio espacial que descubrió el candidato"
+                    }
+                },
+                "missions": {
+                    "kepler": "Kepler",
+                    "k2": "K2",
+                    "tess": "TESS"
+                },
+                "submit": "Predecir Confirmación",
+                "validation": {
+                    "required": "Este campo es obligatorio",
+                    "positive_number": "Debe ser un número positivo",
+                    "stellar_temp_min": "La temperatura estelar debe ser al menos 1000 K",
+                    "select_mission": "Por favor selecciona una misión"
+                }
+            },
+            "success": "¡Predicción completada exitosamente!",
+            "error": "Error al procesar la predicción. Por favor intenta de nuevo."
         }
     }
 }

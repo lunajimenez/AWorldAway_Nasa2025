@@ -152,7 +152,7 @@
         <!-- Navigation -->
         <nav class="relative z-10 p-4 flex justify-between items-center">
             <NuxtLink
-                to="/"
+                :to="$localeRoute({ path: '/' })"
                 class="inline-flex items-center gap-2 text-white/70 hover:text-white transition-colors"
             >
                 <ChevronLeft :size="20" />

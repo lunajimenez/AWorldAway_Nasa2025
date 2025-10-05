@@ -17,6 +17,15 @@ tasks:
     generate:
         command: uv
         args: 
-            - --help
+            - run
+            - scripts/ML.py
+            - --csv
+            - data/processed/FinalDataHarmonization.csv
+            - --test-size
+            - "0.2"
+            - --seed
+            - "42"
+            - --out
+            - .output/model
         options:
             runFromWorkspaceRoot: false
