@@ -7,8 +7,7 @@
 
     const modal = useModal();
 
-    const loadingScreen = useTemplateRef("LoadingScreen");
-    const isLoading = ref(true);
+    const { isLoading, hideLoading } = useAppLoading();
 
     const mountReference = useTemplateRef("MountRef");
     const { init, cleanup, Camera } = useControls();
@@ -17,7 +16,7 @@
         nextTick(async () => {
             init(mountReference.value);
 
-            await loadingScreen.value?.hideLoading();
+            await hideLoading();
         });
     });
 
@@ -28,7 +27,7 @@
 
 <template>
     <main class="relative w-full h-screen overflow-hidden">
-        <CommonHomeLoadingBanner ref="LoadingScreen" v-model="isLoading" />
+        <CommonHomeLoadingBanner v-model="isLoading" />
 
         <div ref="MountRef" class="w-full h-full" />
 
@@ -88,6 +87,10 @@
                     "
                 >
                     <Settings />
+                </Button>
+
+                <Button variant="link" as-child>
+                    <NuxtLink to="/about"> {{ $t("pages.about.title") }} </NuxtLink>
                 </Button>
             </div>
 

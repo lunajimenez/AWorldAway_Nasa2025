@@ -18,6 +18,25 @@
             "loading": {
                 "slogan": "Initializing universe..."
             }
+        },
+        "about": {
+            "title": "About",
+            "navigation": {
+                "back": "Back to Planet"
+            },
+            "header": {
+                "title": "About Our Mission",
+                "description": "We are explorers, dreamers, and builders charting a course through the digital cosmos. Our mission is to push the boundaries of what's possible in the universe of technology."
+            },
+            "team": {
+                "title": "Our Crew",
+                "roles": {
+                    "team_leader": "Team Leader",
+                    "data_scientist": "Data Scientist",
+                    "frontend_developer": "Frontend Developer",
+                    "fullstack_developer": "Fullstack Developer"
+                }
+            }
         }
     }
 }

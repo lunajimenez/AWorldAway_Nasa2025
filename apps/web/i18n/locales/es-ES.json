@@ -18,6 +18,25 @@
             "loading": {
                 "slogan": "Inicializando universo..."
             }
+        },
+        "about": {
+            "title": "Conocenos",
+            "navigation": {
+                "back": "Volver al Planeta"
+            },
+            "header": {
+                "title": "Sobre Nuestra Misión",
+                "description": "Somos exploradores, soñadores y constructores trazando un rumbo a través del cosmos digital. Nuestra misión es superar los límites de lo posible en el universo de la tecnología."
+            },
+            "team": {
+                "title": "Nuestra Tripulación",
+                "roles": {
+                    "team_leader": "Líder de Equipo",
+                    "data_scientist": "Científico de Datos",
+                    "frontend_developer": "Desarrollador Frontend",
+                    "fullstack_developer": "Desarrollador Fullstack"
+                }
+            }
         }
     }
 }
