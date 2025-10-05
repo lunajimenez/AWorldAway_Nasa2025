@@ -1,0 +1,16 @@
+$schema: https://moonrepo.dev/schemas/project.json
+
+layer: tool
+language: python
+
+project:
+    name: "Analytics"
+    description: "Analytics for the data"
+
+tasks:
+    uv:
+        command: uv
+        local: true
+        options:
+            runFromWorkspaceRoot: false
+    

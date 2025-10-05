@@ -1,0 +1,25 @@
+layer: application
+language: python
+
+project:
+    name: Server
+    description: API layer for the application
+
+tasks:
+    uv:
+        command: uv
+        local: true
+        options:
+            runFromWorkspaceRoot: false
+
+    run:
+        command: uv
+        args:
+            - run
+            - -m
+            - src.main
+        env:
+            PYTHONPATH: "./src"
+        local: true
+        options:
+            runFromWorkspaceRoot: false

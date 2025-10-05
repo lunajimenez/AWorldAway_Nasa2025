@@ -12,7 +12,12 @@ build
 __pycache__
 *.pyc
 *.egg-info
+<<<<<<< HEAD
 # Entorno local
 Luna/
 
 #hola
+=======
+
+.venv
+>>>>>>> 28d83f9676b3992edd12a99b35c5e962cd899b52

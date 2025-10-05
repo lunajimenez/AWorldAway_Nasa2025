@@ -1,1 +1,20 @@
-{}
+{
+    "pages": {
+        "home": {
+            "title": "AWorldAway_Nasa2025",
+            "ui": {
+                "title": "Explorador de Planeta 3D",
+                "subtitle": "Un planeta girando en su órbita usando Three.js",
+                "try_out": "Pruébalo"
+            },
+            "controls": {
+                "mouse": "Click y arrastra para rotar la vista",
+                "zoom": "Scroll para hacer zoom",
+                "wasd": "WASD para mover la cámara",
+                "shift": "Shift para mover más rápido",
+                "space": "Espacio para subir",
+                "planet": "El planeta gira automáticamente"
+            }
+        }
+    }
+}

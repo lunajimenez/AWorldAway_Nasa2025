@@ -2,6 +2,15 @@ $schema: https://moonrepo.dev/schemas/project.json
 
 layer: automation
 
+id: source
+
 project:
     name: "AWorldAway_Nasa2025"
     description: "ROOT Directory in order to automate some tasks"
+
+tasks:
+    dev:
+        command: noop
+        deps:
+            - server:run
+            - web:dev

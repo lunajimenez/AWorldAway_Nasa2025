@@ -1,5 +1,5 @@
-import tailwindcss from "@tailwindcss/vite";
 import process from "node:process";
+import tailwindcss from "@tailwindcss/vite";
 
 export default defineNuxtConfig({
     compatibilityDate: "2025-07-15",
@@ -23,6 +23,11 @@ export default defineNuxtConfig({
     nitro: {
         imports: {
             dirs: ["./shared/utils/**"],
+        },
+    },
+    runtimeConfig: {
+        public: {
+            apiBase: process.env.API_BASE_URL,
         },
     },
     modules: [

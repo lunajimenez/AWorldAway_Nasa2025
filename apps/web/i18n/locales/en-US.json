@@ -1,1 +1,20 @@
-{}
+{
+    "pages": {
+        "home": {
+            "title": "AWorldAway_Nasa2025",
+            "ui": {
+                "title": "3D Planet Explorer",
+                "subtitle": "A planet rotating in its orbit using Three.js",
+                "try_out": "Try it out"
+            },
+            "controls": {
+                "mouse": "Click and drag to rotate view",
+                "zoom": "Scroll to zoom",
+                "wasd": "WASD to move camera",
+                "shift": "Shift for faster movement",
+                "space": "Space to go up",
+                "planet": "Planet rotates automatically"
+            }
+        }
+    }
+}
