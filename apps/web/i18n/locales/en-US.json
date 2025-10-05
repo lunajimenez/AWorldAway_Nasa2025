@@ -14,6 +14,9 @@
                 "shift": "Shift for faster movement",
                 "space": "Space to go up",
                 "planet": "Planet rotates automatically"
+            },
+            "loading": {
+                "slogan": "Initializing universe..."
             }
         }
     }

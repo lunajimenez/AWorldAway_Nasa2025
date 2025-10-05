@@ -1,4 +1,3 @@
-import type { Texture } from "three";
 import {
     AmbientLight,
     BufferAttribute,
@@ -25,6 +24,14 @@ export default function () {
     const scene = shallowRef<Scene>();
     const cameraReference = shallowRef<PerspectiveCamera>();
     const planetElement = shallowRef<Mesh>();
+    const moonsReference = shallowRef<
+        Array<{
+            mesh: Mesh;
+            orbitSpeed: number;
+            orbitRadius: number;
+            orbitAngle: number;
+        }>
+    >([]);
 
     const animationIdReference = ref<number>();
 
@@ -247,29 +254,20 @@ export default function () {
             planetElement.value.rotation.x += 0.002;
         }
 
+        if (moonsReference.value) {
+            moonsReference.value.forEach((moon) => {
+                moon.orbitAngle += moon.orbitSpeed;
+
+                moon.mesh.position.x = Math.cos(moon.orbitAngle) * moon.orbitRadius;
+                moon.mesh.position.z = Math.sin(moon.orbitAngle) * moon.orbitRadius;
+
+                moon.mesh.rotation.y += 0.003;
+            });
+        }
+
         if (renderer.value && scene.value && cameraReference.value) {
             renderer.value.render(scene.value, cameraReference.value);
         }
-    }
-
-    function createStarTexture(): Texture {
-        const canvas = document.createElement("canvas");
-        canvas.width = 32;
-        canvas.height = 32;
-        const context = canvas.getContext("2d")!;
-
-        const gradient = context.createRadialGradient(16, 16, 0, 16, 16, 16);
-        gradient.addColorStop(0, "rgba(255, 255, 255, 1)");
-        gradient.addColorStop(0.2, "rgba(255, 255, 255, 0.8)");
-        gradient.addColorStop(0.4, "rgba(255, 255, 255, 0.4)");
-        gradient.addColorStop(0.7, "rgba(255, 255, 255, 0.1)");
-        gradient.addColorStop(1, "rgba(255, 255, 255, 0)");
-
-        context.fillStyle = gradient;
-        context.fillRect(0, 0, 32, 32);
-
-        const texture = new CanvasTexture(canvas);
-        return texture;
     }
 
     function init(mountElement: HTMLDivElement | null) {
@@ -459,7 +457,48 @@ export default function () {
         const stars = new Points(_starsGeometry, starsMaterial);
         _scene.add(stars);
 
-        animate();
+        for (let i = 0; i < CONSTANTS.HOME.MOON_COUNT; i++) {
+            const moonSize = 0.2 + Math.random() * 0.3;
+            const moonGeometry = new SphereGeometry(moonSize, 32, 32);
+
+            // eslint-disable-next-line style/operator-linebreak
+            const colorScheme =
+                MOON_COLOR_SCHEMES[Math.floor(Math.random() * MOON_COLOR_SCHEMES.length)]!;
+
+            const moonTexture = createMoonTexture(colorScheme);
+
+            const moonMaterial = new MeshPhongMaterial({
+                map: moonTexture,
+                shininess: 20,
+                transparent: false,
+            });
+
+            const moon = new Mesh(moonGeometry, moonMaterial);
+
+            const orbitRadius = 2.5 + i * 1.2;
+            const orbitAngle = (i / CONSTANTS.HOME.MOON_COUNT) * Math.PI * 2;
+            const orbitSpeed = 0.0003 + Math.random() * 0.0002;
+
+            moon.position.set(
+                Math.cos(orbitAngle) * orbitRadius,
+                (Math.random() - 0.5) * 0.5,
+                Math.sin(orbitAngle) * orbitRadius,
+            );
+
+            moon.castShadow = true;
+            moon.receiveShadow = true;
+
+            moonsReference.value.push({
+                mesh: moon,
+                orbitSpeed,
+                orbitRadius,
+                orbitAngle,
+            });
+
+            _scene.add(moon);
+
+            animate();
+        }
     }
 
     function cleanup(mountElement: HTMLDivElement | null) {

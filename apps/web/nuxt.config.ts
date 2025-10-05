@@ -38,6 +38,7 @@ export default defineNuxtConfig({
         "@vueuse/nuxt",
         "@vee-validate/nuxt",
         "@nuxtjs/i18n",
+        "@nuxt/fonts",
     ],
     shadcn: {
         prefix: "",
@@ -81,5 +82,16 @@ export default defineNuxtConfig({
                 file: "es-ES.json",
             },
         ],
+    },
+    fonts: {
+        families: [
+            {
+                name: "Pixelify Sans",
+                provider: "local",
+            },
+        ],
+        assets: {
+            prefix: "/_fonts/",
+        },
     },
 });

@@ -6,12 +6,18 @@
     });
 
     const modal = useModal();
+
+    const loadingScreen = useTemplateRef("LoadingScreen");
+    const isLoading = ref(true);
+
     const mountReference = useTemplateRef("MountRef");
     const { init, cleanup, Camera } = useControls();
 
     onMounted(() => {
-        nextTick(() => {
+        nextTick(async () => {
             init(mountReference.value);
+
+            await loadingScreen.value?.hideLoading();
         });
     });
 
@@ -22,6 +28,8 @@
 
 <template>
     <main class="relative w-full h-screen overflow-hidden">
+        <CommonHomeLoadingBanner ref="LoadingScreen" v-model="isLoading" />
+
         <div ref="MountRef" class="w-full h-full" />
 
         <div
