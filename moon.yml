@@ -23,8 +23,19 @@ tasks:
             - analytics:generate
             - source:copy-model
 
+    deploy:
+        command: bash
+        args:
+            - scripts/deploy.sh
+        deps:
+            - source:prepare
+        options:
+            runFromWorkspaceRoot: true
+            cache: false
+
     dev:
         command: noop
         deps:
+            - source:prepare
             - server:run
             - web:dev

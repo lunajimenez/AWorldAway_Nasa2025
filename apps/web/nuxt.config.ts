@@ -14,6 +14,14 @@ export default defineNuxtConfig({
         },
         build: {
             sourcemap: false,
+            minify: "terser",
+            rollupOptions: {
+                output: {
+                    manualChunks: {
+                        three: ["three"],
+                    },
+                },
+            },
         },
     },
     imports: {
@@ -24,6 +32,7 @@ export default defineNuxtConfig({
         imports: {
             dirs: ["./shared/utils/**"],
         },
+        preset: "node-server",
     },
     runtimeConfig: {
         public: {
