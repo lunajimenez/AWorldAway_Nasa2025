@@ -9,6 +9,20 @@ project:
     description: "ROOT Directory in order to automate some tasks"
 
 tasks:
+    copy-model:
+        command: bash
+        args:
+            - scripts/handle-model.sh
+        options:
+            runFromWorkspaceRoot: true
+            cache: false
+
+    prepare:
+        command: noop
+        deps:
+            - analytics:generate
+            - source:copy-model
+
     dev:
         command: noop
         deps:

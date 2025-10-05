@@ -14,3 +14,9 @@ tasks:
         options:
             runFromWorkspaceRoot: false
     
+    generate:
+        command: uv
+        args: 
+            - --help
+        options:
+            runFromWorkspaceRoot: false
