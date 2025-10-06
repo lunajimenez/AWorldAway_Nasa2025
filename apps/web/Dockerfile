@@ -1,26 +1,62 @@
-FROM node:lts-alpine AS builder
+# ==============================
+# Base image
+# ==============================
+FROM python:3.13-slim
 
+# Permite que Python imprima logs en tiempo real
+ENV PYTHONUNBUFFERED=1
+
+# Directorio de trabajo
 WORKDIR /app
 
-ENV NODE_ENV="production"
-ENV PNPM_HOME="/pnpm"
-ENV PATH="$PNPM_HOME:$PATH"
-ENV API_BASE_URL="https://aworldaway-api-production.up.railway.app"
-RUN corepack enable
+# ==============================
+# Variables de entorno dinámicas
+# ==============================
+# ARG = valor recibido al hacer build (Railway o local)
+ARG API_BASE_URL
+# ENV = define la variable dentro del contenedor
+ENV API_BASE_URL=${API_BASE_URL}
 
-COPY . /app/
+# (Puedes agregar más si necesitas, por ejemplo)
+# ARG NUXT_PUBLIC_SITE_URL
+# ENV NUXT_PUBLIC_SITE_URL=${NUXT_PUBLIC_SITE_URL}
 
-RUN pnpm i --prod
+# ==============================
+# Instalar UV (gestor ultrarrápido de Python)
+# ==============================
+COPY --from=ghcr.io/astral-sh/uv:0.7.6 /uv /uvx /bin/
 
-RUN npx nuxi build
+# ==============================
+# Configuración base
+# ==============================
+ENV PATH="/app/.venv/bin:$PATH"
+ENV UV_COMPILE_BYTECODE=1
+ENV UV_LINK_MODE=copy
 
-FROM node:lts-alpine AS runner
+# ==============================
+# Dependencias del proyecto
+# ==============================
+COPY pyproject.toml uv.lock /app/
+RUN uv sync --frozen --no-install-project
 
-WORKDIR /app
-ENV NODE_ENV=production
+# ==============================
+# Código fuente
+# ==============================
+COPY src/ /app/src/
+COPY models/ /app/models/
+COPY assets/ /app/assets/
 
-COPY --from=builder /app/.output/ /app/.output/
+# ==============================
+# Variables adicionales (si aplica)
+# ==============================
+ENV PYTHONPATH=/app/src
 
-EXPOSE 3000
+# ==============================
+# Exponer puerto dinámico
+# ==============================
+EXPOSE 8000
 
-CMD [ "node", ".output/server/index.mjs" ]
+# ==============================
+# Comando de inicio
+# ==============================
+CMD ["sh", "-c", "uv run -m src.main --host 0.0.0.0 --port $PORT"]
