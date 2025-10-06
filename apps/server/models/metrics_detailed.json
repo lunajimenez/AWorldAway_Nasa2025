@@ -1,0 +1,48 @@
+{
+  "ROC_AUC": 0.8889116129237357,
+  "PR_AUC": 0.7774135878898871,
+  "Best_Threshold_F1": 0.3433333333333333,
+  "Accuracy": 0.8124264532831255,
+  "Macro_F1": 0.7868441653437478,
+  "Confusion_Matrix": [
+    [
+      2462,
+      522
+    ],
+    [
+      275,
+      990
+    ]
+  ],
+  "Classification_Report": {
+    "NOT_CONFIRMED": {
+      "precision": 0.8995250274022653,
+      "recall": 0.8250670241286864,
+      "f1-score": 0.8606886907883238,
+      "support": 2984.0
+    },
+    "CONFIRMED": {
+      "precision": 0.6547619047619048,
+      "recall": 0.782608695652174,
+      "f1-score": 0.7129996398991718,
+      "support": 1265.0
+    },
+    "accuracy": 0.8124264532831255,
+    "macro avg": {
+      "precision": 0.7771434660820851,
+      "recall": 0.8038378598904301,
+      "f1-score": 0.7868441653437478,
+      "support": 4249.0
+    },
+    "weighted avg": {
+      "precision": 0.8266548579176675,
+      "recall": 0.8124264532831255,
+      "f1-score": 0.8167191333925183,
+      "support": 4249.0
+    }
+  },
+  "N_features_numeric": 8,
+  "N_features_categorical": 1,
+  "Rows_Total": 21245,
+  "Rows_Labeled": 21245
+}

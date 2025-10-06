@@ -1,0 +1,10 @@
+feature,importance
+planet_radius_earth,0.21081581717397527
+orbital_period_days,0.11404223558478002
+transit_depth_ppm,0.1086567501851435
+transit_duration_hours,0.10236588846387935
+stellar_radius_solar,0.09950371120103205
+insolation_flux_Earth,0.09808998871082308
+stellar_temperature_K,0.09391977069239474
+equilibrium_temperature_K,0.08780720715969004
+source_mission,0.08479863082828193

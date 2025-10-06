@@ -1,0 +1,26 @@
+{
+  "source_csv": "data\\processed\\FinalDataHarmonization.csv",
+  "numeric_columns": [
+    "orbital_period_days",
+    "transit_duration_hours",
+    "transit_depth_ppm",
+    "planet_radius_earth",
+    "equilibrium_temperature_K",
+    "insolation_flux_Earth",
+    "stellar_radius_solar",
+    "stellar_temperature_K"
+  ],
+  "categorical_columns": [
+    "source_mission"
+  ],
+  "dropped_columns": [],
+  "threshold": 0.3433333333333333,
+  "metrics": {
+    "ROC_AUC": 0.8889116129237357,
+    "PR_AUC": 0.7774135878898871
+  },
+  "random_state": 42,
+  "test_size": 0.2,
+  "auto_drop_ids": true,
+  "exclude_cols": []
+}
