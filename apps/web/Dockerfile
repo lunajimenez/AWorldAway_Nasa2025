@@ -5,6 +5,7 @@ WORKDIR /app
 ENV NODE_ENV="production"
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
+ENV API_BASE_URL="https://aworldaway-api-production.up.railway.app"
 RUN corepack enable
 
 COPY . /app/

@@ -70,7 +70,7 @@ export default defineNuxtConfig({
         autoImports: false,
     },
     i18n: {
-        baseUrl: process.env.BASE_URL,
+        baseUrl: process.env.NUXT_PUBLIC_SITE_URL,
         skipSettingLocaleOnNavigate: false,
         detectBrowserLanguage: {
             useCookie: true,
