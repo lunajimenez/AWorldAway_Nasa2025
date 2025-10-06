@@ -22,8 +22,8 @@ COPY src/ /app/src/
 COPY models/ /app/models/
 COPY assets/ /app/assets/
 
-RUN --mount=type=cache,target=/root/.cache/uv \
-    uv sync
+RUN --mount=type=cache,id=pip-cache,target=/root/.cache/pip pip install -r requirements.txt
+
 
 EXPOSE 8000
 
