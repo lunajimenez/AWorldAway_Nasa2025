@@ -3,8 +3,8 @@
         "home": {
             "title": "AWorldAway_Nasa2025",
             "ui": {
-                "title": "Explorador de Planeta 3D",
-                "subtitle": "Un planeta girando en su órbita usando Three.js",
+                "title": "A World Away - Nasa 2025",
+                "subtitle": "Identificador de Exoplanetas usando ML",
                 "try_out": "Pruébalo"
             },
             "controls": {
