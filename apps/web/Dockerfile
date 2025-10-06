@@ -1,62 +1,53 @@
 # ==============================
-# Base image
+# Build stage
 # ==============================
-FROM python:3.13-slim
+FROM node:lts-alpine AS builder
 
-# Permite que Python imprima logs en tiempo real
-ENV PYTHONUNBUFFERED=1
-
-# Directorio de trabajo
 WORKDIR /app
 
+# Configuración general del entorno
+ENV NODE_ENV=production
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+
+# Habilitar Corepack para manejar pnpm
+RUN corepack enable
+
 # ==============================
-# Variables de entorno dinámicas
+# Variables dinámicas
 # ==============================
-# ARG = valor recibido al hacer build (Railway o local)
+# Recibidas desde Railway o el build local
 ARG API_BASE_URL
-# ENV = define la variable dentro del contenedor
+ARG NUXT_PUBLIC_SITE_URL
+
+# Disponibles dentro del contenedor en runtime
 ENV API_BASE_URL=${API_BASE_URL}
-
-# (Puedes agregar más si necesitas, por ejemplo)
-# ARG NUXT_PUBLIC_SITE_URL
-# ENV NUXT_PUBLIC_SITE_URL=${NUXT_PUBLIC_SITE_URL}
+ENV NUXT_PUBLIC_SITE_URL=${NUXT_PUBLIC_SITE_URL}
 
 # ==============================
-# Instalar UV (gestor ultrarrápido de Python)
+# Dependencias y build
 # ==============================
-COPY --from=ghcr.io/astral-sh/uv:0.7.6 /uv /uvx /bin/
+COPY . .
+
+# Instala solo dependencias de producción
+RUN pnpm install --frozen-lockfile --prod
+
+# Compila la app Nuxt
+RUN npx nuxi build
 
 # ==============================
-# Configuración base
+# Runtime stage
 # ==============================
-ENV PATH="/app/.venv/bin:$PATH"
-ENV UV_COMPILE_BYTECODE=1
-ENV UV_LINK_MODE=copy
+FROM node:lts-alpine AS runner
 
-# ==============================
-# Dependencias del proyecto
-# ==============================
-COPY pyproject.toml uv.lock /app/
-RUN uv sync --frozen --no-install-project
+WORKDIR /app
+ENV NODE_ENV=production
 
-# ==============================
-# Código fuente
-# ==============================
-COPY src/ /app/src/
-COPY models/ /app/models/
-COPY assets/ /app/assets/
+# Copiamos el resultado compilado
+COPY --from=builder /app/.output /app/.output
 
-# ==============================
-# Variables adicionales (si aplica)
-# ==============================
-ENV PYTHONPATH=/app/src
+# Exponemos el puerto dinámico asignado por Railway
+EXPOSE 3000
 
-# ==============================
-# Exponer puerto dinámico
-# ==============================
-EXPOSE 8000
-
-# ==============================
-# Comando de inicio
-# ==============================
-CMD ["sh", "-c", "uv run -m src.main --host 0.0.0.0 --port $PORT"]
+# Comando de arranque
+CMD ["node", ".output/server/index.mjs"]
