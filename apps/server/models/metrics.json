@@ -1,0 +1,11 @@
+{
+  "ROC_AUC": 0.8891538799817736,
+  "PR_AUC": 0.7752336762394139,
+  "Best_Threshold_F1": 0.36666666666666664,
+  "Accuracy": 0.8201929865850789,
+  "Macro_F1": 0.7917204971653976,
+  "Positives_in_Test": 1265,
+  "Negatives_in_Test": 2984,
+  "N_features_numeric": 8,
+  "N_features_categorical": 1
+}
