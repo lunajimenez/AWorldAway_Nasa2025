@@ -29,9 +29,6 @@ ENV NUXT_PUBLIC_SITE_URL=${NUXT_PUBLIC_SITE_URL}
 # ==============================
 COPY . .
 
-# Instala solo dependencias de producción
-RUN pnpm install --frozen-lockfile --prod
-
 # Compila la app Nuxt
 RUN npx nuxi build
 
