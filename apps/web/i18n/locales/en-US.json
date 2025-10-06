@@ -3,8 +3,8 @@
         "home": {
             "title": "AWorldAway_Nasa2025",
             "ui": {
-                "title": "3D Planet Explorer",
-                "subtitle": "A planet rotating in its orbit using Three.js",
+                "title": "A World Away - Nasa 2025",
+                "subtitle": "ML Exoplanet Identifier",
                 "try_out": "Try it out"
             },
             "controls": {

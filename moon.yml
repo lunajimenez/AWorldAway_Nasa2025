@@ -23,6 +23,8 @@ tasks:
         command: noop
         deps:
             - source:copy-model
+        options:
+            cache: false
 
     deploy:
         command: bash
