@@ -36,7 +36,7 @@ export default defineNuxtConfig({
     },
     runtimeConfig: {
         public: {
-            apiBase: process.env.API_BASE_URL,
+            apiBase: process.env.API_BASE_URL || '',
         },
     },
     modules: [
@@ -70,7 +70,7 @@ export default defineNuxtConfig({
         autoImports: false,
     },
     i18n: {
-        baseUrl: process.env.BASE_URL,
+        baseUrl: process.env.NUXT_PUBLIC_SITE_URL,
         skipSettingLocaleOnNavigate: false,
         detectBrowserLanguage: {
             useCookie: true,
