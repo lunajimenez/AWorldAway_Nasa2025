@@ -1,8 +1,8 @@
 # AWorldAway - NASA Space Apps Challenge 2025 🚀
 
 <div align="center">
-    <img src="./assets/images/ASTROBYTESUTB.svg" alt="Project Banner" width=500 />
-    
+    <img src="./assets/images/Stardust-Crusaders.png" alt="Project Banner" width=500 />
+
 [![NASA Space Apps Challenge](https://img.shields.io/badge/NASA-Space%20Apps%20Challenge%202025-blue?style=flat-square&logo=nasa)](https://www.spaceappschallenge.org/)
 [![License](https://img.shields.io/badge/license-MIT-green?style=flat-square)](LICENSE)
 [![Moon](https://img.shields.io/badge/monorepo-moonrepo-purple?style=flat-square)](https://moonrepo.dev)
@@ -16,13 +16,13 @@ An interactive web application that leverages NASA's open exoplanet datasets to 
 
 ## ✨ Features
 
--   🤖 **ML-Powered Predictions**: Binary classification model (Random Forest) trained on KOI, K2, and TESS mission data
--   🌍 **Interactive 3D Visualization**: Immersive planet explorer built with Three.js
--   📊 **Real-time Analytics**: Comprehensive model metrics and performance dashboards
--   🌐 **Multilingual Support**: Full i18n support (English & Spanish)
--   🎨 **Modern UI**: Built with Nuxt 4, Vue 3, and Tailwind CSS
--   ⚡ **Fast API**: Python FastAPI backend with optimized predictions
--   📈 **Data Pipeline**: Automated harmonization of multiple NASA datasets
+- 🤖 **ML-Powered Predictions**: Binary classification model (Random Forest) trained on KOI, K2, and TESS mission data
+- 🌍 **Interactive 3D Visualization**: Immersive planet explorer built with Three.js
+- 📊 **Real-time Analytics**: Comprehensive model metrics and performance dashboards
+- 🌐 **Multilingual Support**: Full i18n support (English & Spanish)
+- 🎨 **Modern UI**: Built with Nuxt 4, Vue 3, and Tailwind CSS
+- ⚡ **Fast API**: Python FastAPI backend with optimized predictions
+- 📈 **Data Pipeline**: Automated harmonization of multiple NASA datasets
 
 ---
 
@@ -30,29 +30,29 @@ An interactive web application that leverages NASA's open exoplanet datasets to 
 
 ### Frontend
 
--   **Nuxt 4** - Meta-framework for Vue 3
--   **Vue 3** - Progressive JavaScript framework
--   **Tailwind CSS** - Utility-first CSS framework
--   **Three.js** - 3D graphics library
--   **shadcn-vue** - Beautiful UI components
--   **TypeScript** - Type-safe development
+- **Nuxt 4** - Meta-framework for Vue 3
+- **Vue 3** - Progressive JavaScript framework
+- **Tailwind CSS** - Utility-first CSS framework
+- **Three.js** - 3D graphics library
+- **shadcn-vue** - Beautiful UI components
+- **TypeScript** - Type-safe development
 
 ### Backend
 
--   **FastAPI** - Modern Python web framework
--   **scikit-learn** - Machine learning library
--   **pandas** - Data manipulation and analysis
--   **joblib** - Model serialization
--   **Pydantic** - Data validation
+- **FastAPI** - Modern Python web framework
+- **scikit-learn** - Machine learning library
+- **pandas** - Data manipulation and analysis
+- **joblib** - Model serialization
+- **Pydantic** - Data validation
 
 ### DevOps & Tools
 
--   **Moonrepo** - Monorepo orchestrator
--   **pnpm** - Fast, disk space efficient package manager
--   **uv** - Ultra-fast Python package installer
--   **Docker** - Containerization
--   **ESLint** - Code linting
--   **Ruff** - Python linter/formatter
+- **Moonrepo** - Monorepo orchestrator
+- **pnpm** - Fast, disk space efficient package manager
+- **uv** - Ultra-fast Python package installer
+- **Docker** - Containerization
+- **ESLint** - Code linting
+- **Ruff** - Python linter/formatter
 
 ---
 
@@ -85,11 +85,11 @@ AWorldAway_Nasa2025/
 
 ### Prerequisites
 
--   **Node.js** >= 20.x
--   **Python** >= 3.13
--   **pnpm** >= 9.x ([Install](https://pnpm.io/installation))
--   **uv** >= 0.4.x ([Install](https://docs.astral.sh/uv/getting-started/installation/))
--   **moonrepo** ([Install](https://moonrepo.dev/docs/install))
+- **Node.js** >= 20.x
+- **Python** >= 3.13
+- **pnpm** >= 9.x ([Install](https://pnpm.io/installation))
+- **uv** >= 0.4.x ([Install](https://docs.astral.sh/uv/getting-started/installation/))
+- **moonrepo** ([Install](https://moonrepo.dev/docs/install))
 
 #### Installing Prerequisites
 
@@ -152,6 +152,7 @@ npm install -g @moonrepo/cli
     - ✅ Start the Nuxt frontend on `http://localhost:3000`
 
 4. **Open your browser**
+
     ```
     http://localhost:3000
     ```
@@ -208,23 +209,23 @@ moon analytics:uv -- run scripts/harmonize_intersection.py
 
 Our binary classification model achieves:
 
--   **ROC AUC**: 88.89%
--   **PR AUC**: 77.74%
--   **Accuracy**: 81.24%
--   **Macro F1**: 78.68%
--   **Optimal Threshold**: 0.3433
+- **ROC AUC**: 88.89%
+- **PR AUC**: 77.74%
+- **Accuracy**: 81.24%
+- **Macro F1**: 78.68%
+- **Optimal Threshold**: 0.3433
 
 The model uses 9 features including:
 
--   Orbital period (days)
--   Transit duration (hours)
--   Planet radius (Earth radii)
--   Equilibrium temperature (K)
--   Transit depth (ppm)
--   Insolation flux (Earth flux)
--   Stellar radius (Solar radii)
--   Stellar temperature (K)
--   Source mission (Kepler/K2/TESS)
+- Orbital period (days)
+- Transit duration (hours)
+- Planet radius (Earth radii)
+- Equilibrium temperature (K)
+- Transit depth (ppm)
+- Insolation flux (Earth flux)
+- Stellar radius (Solar radii)
+- Stellar temperature (K)
+- Source mission (Kepler/K2/TESS)
 
 ---
 
@@ -232,15 +233,15 @@ The model uses 9 features including:
 
 ### Model Predictions
 
--   `GET /api/model/predict-one` - Single exoplanet candidate prediction
--   `POST /api/model/predict-params` - Batch predictions
--   `GET /api/model/metrics` - Model performance metrics
--   `GET /api/model/info` - Model configuration
+- `GET /api/model/predict-one` - Single exoplanet candidate prediction
+- `POST /api/model/predict-params` - Batch predictions
+- `GET /api/model/metrics` - Model performance metrics
+- `GET /api/model/info` - Model configuration
 
 ### Documentation
 
--   Interactive API docs: `http://localhost:8000/docs`
--   OpenAPI schema: `http://localhost:8000/openapi.json`
+- Interactive API docs: `http://localhost:8000/docs`
+- OpenAPI schema: `http://localhost:8000/openapi.json`
 
 ---
 
@@ -250,29 +251,29 @@ The model uses 9 features including:
 
 Explore a procedurally generated planet with orbiting moons using Three.js. Features include:
 
--   Real-time camera controls (WASD + mouse)
--   Dynamic lighting and shadows
--   Procedural textures for planets and moons
--   Starfield background with 1000+ stars
+- Real-time camera controls (WASD + mouse)
+- Dynamic lighting and shadows
+- Procedural textures for planets and moons
+- Starfield background with 1000+ stars
 
 ### 2. ML Prediction Interface
 
 User-friendly form to input exoplanet parameters and get instant predictions with:
 
--   Real-time validation
--   Confidence scores
--   Visual result modal with interpretation
--   Multilingual support
+- Real-time validation
+- Confidence scores
+- Visual result modal with interpretation
+- Multilingual support
 
 ### 3. Metrics Dashboard
 
 Comprehensive visualization of model performance:
 
--   Confusion matrix
--   Classification report
--   ROC/PR AUC scores
--   Dataset statistics
--   Feature importance
+- Confusion matrix
+- Classification report
+- ROC/PR AUC scores
+- Dataset statistics
+- Feature importance
 
 ---
 
@@ -328,11 +329,11 @@ The entire pipeline is orchestrated by **moonrepo** and runs with a single comma
 
 **StardustCrusaders** - Universidad Tecnológica de Bolívar
 
--   **Luna Jiménez** - Team Leader & Data Scientist
--   **Leonardo González** - Data Scientist & Hardware Developer
--   **Maria García** - Data Scientist & Backend Developer
--   **Michael Taboada** - Data Scientist & Backend Developer
--   **Mauro Gonzalez** - Fullstack Developer & Data Scientist
+- **Luna Jiménez** - Team Leader & Data Scientist
+- **Leonardo González** - Data Scientist & Hardware Developer
+- **Maria García** - Data Scientist & Backend Developer
+- **Michael Taboada** - Data Scientist & Backend Developer
+- **Mauro Gonzalez** - Fullstack Developer & Data Scientist
 
 ---
 
@@ -344,21 +345,21 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🙏 Acknowledgments
 
--   NASA for providing open exoplanet datasets
--   Space Apps Challenge organizers
--   The open-source community
--   [Astral](https://astral.sh/) for the amazing `uv` tool
--   [Moonrepo](https://moonrepo.dev/) for monorepo orchestration
+- NASA for providing open exoplanet datasets
+- Space Apps Challenge organizers
+- The open-source community
+- [Astral](https://astral.sh/) for the amazing `uv` tool
+- [Moonrepo](https://moonrepo.dev/) for monorepo orchestration
 
 ---
 
 ## 🔗 Links
 
--   [NASA Exoplanet Archive](https://exoplanetarchive.ipac.caltech.edu/)
--   [Space Apps Challenge](https://www.spaceappschallenge.org/)
--   [Project Repository](https://github.com/yourusername/AWorldAway_Nasa2025)
--   [uv Documentation](https://docs.astral.sh/uv/)
--   [Moonrepo Documentation](https://moonrepo.dev/docs)
+- [NASA Exoplanet Archive](https://exoplanetarchive.ipac.caltech.edu/)
+- [Space Apps Challenge](https://www.spaceappschallenge.org/)
+- [Project Repository](https://github.com/yourusername/AWorldAway_Nasa2025)
+- [uv Documentation](https://docs.astral.sh/uv/)
+- [Moonrepo Documentation](https://moonrepo.dev/docs)
 
 ---
 
