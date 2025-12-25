@@ -150,12 +150,12 @@
 </script>
 
 <template>
-    <form class="space-y-4" @submit="onSubmit">
-        <div class="space-y-4">
-            <h3 class="text-lg font-semibold flex items-center gap-2">
+    <form class="space-y-3 sm:space-y-4" @submit="onSubmit">
+        <div class="space-y-3 sm:space-y-4">
+            <h3 class="text-sm sm:text-lg font-semibold flex items-center gap-1.5 sm:gap-2">
                 🌍 {{ $t("pages.predict.form.sections.orbital") }}
             </h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="grid grid-cols-1 gap-3 sm:gap-4">
                 <FormField v-slot="{ componentField }" name="orbital_period_days">
                     <FormItem>
                         <FormLabel>
@@ -198,11 +198,11 @@
             </div>
         </div>
 
-        <div class="space-y-4">
-            <h3 class="text-lg font-semibold flex items-center gap-2">
+        <div class="space-y-3 sm:space-y-4">
+            <h3 class="text-sm sm:text-lg font-semibold flex items-center gap-1.5 sm:gap-2">
                 🪐 {{ $t("pages.predict.form.sections.planet") }}
             </h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-start">
+            <div class="grid grid-cols-1 gap-3 sm:gap-4 items-start">
                 <FormField v-slot="{ componentField }" name="planet_radius_earth">
                     <FormItem>
                         <FormLabel>
@@ -245,11 +245,11 @@
             </div>
         </div>
 
-        <div class="space-y-4">
-            <h3 class="text-lg font-semibold flex items-center gap-2">
+        <div class="space-y-3 sm:space-y-4">
+            <h3 class="text-sm sm:text-lg font-semibold flex items-center gap-1.5 sm:gap-2">
                 📉 {{ $t("pages.predict.form.sections.transit") }}
             </h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-start">
+            <div class="grid grid-cols-1 gap-3 sm:gap-4 items-start">
                 <FormField v-slot="{ componentField }" name="transit_depth_ppm">
                     <FormItem>
                         <FormLabel>
@@ -292,11 +292,11 @@
             </div>
         </div>
 
-        <div class="space-y-4">
-            <h3 class="text-lg font-semibold flex items-center gap-2">
+        <div class="space-y-3 sm:space-y-4">
+            <h3 class="text-sm sm:text-lg font-semibold flex items-center gap-1.5 sm:gap-2">
                 ⭐ {{ $t("pages.predict.form.sections.stellar") }}
             </h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-start">
+            <div class="grid grid-cols-1 gap-3 sm:gap-4 items-start">
                 <FormField v-slot="{ componentField }" name="stellar_radius_solar">
                     <FormItem>
                         <FormLabel>
@@ -339,12 +339,12 @@
             </div>
         </div>
 
-        <div class="flex space-x-2">
-            <Button type="submit" class="grow" :disabled="isLoading">
+        <div class="flex flex-col sm:flex-row gap-2 sm:space-x-2">
+            <Button type="submit" class="grow text-sm sm:text-base" :disabled="isLoading">
                 <span>{{ $t("pages.predict.form.submit") }}</span>
             </Button>
 
-            <CommonSettingsLocale class="grow" />
+            <CommonSettingsLocale class="sm:grow" />
         </div>
     </form>
 </template>

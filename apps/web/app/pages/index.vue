@@ -32,65 +32,62 @@
         <div ref="MountRef" class="w-full h-full" />
 
         <div
-            class="absolute top-0 left-0 z-10 h-full w-full grid grid-cols-12 grid-rows-12 gap-4 p-4 pointer-events-none"
+            class="absolute top-0 left-0 z-10 h-full w-full flex flex-col justify-between p-3 sm:p-4 pointer-events-none"
         >
-            <div
-                class="col-start-1 col-span-8 row-start-1 row-span-2 flex flex-col justify-center pointer-events-auto"
-            >
-                <h1 class="text-2xl font-bold mb-2">{{ $t("pages.home.ui.title") }}</h1>
-                <p class="text-sm opacity-80">{{ $t("pages.home.ui.subtitle") }}</p>
+            <!-- Header Section -->
+            <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
+                <div class="pointer-events-auto">
+                    <h1 class="text-lg sm:text-2xl font-bold mb-1 sm:mb-2">{{ $t("pages.home.ui.title") }}</h1>
+                    <p class="text-xs sm:text-sm opacity-80">{{ $t("pages.home.ui.subtitle") }}</p>
+                </div>
+
+                <div class="pointer-events-auto">
+                    <Button
+                        class="font-bold text-sm sm:text-base"
+                        size="sm"
+                        @click="
+                            () => {
+                                modal.loadComponent({
+                                    loader: () =>
+                                        import(
+                                            '~/components/common/settings/modal/CommonSettingsModelModal.vue'
+                                        ),
+                                    key: 'settings:model',
+                                });
+
+                                modal.open.value = true;
+                            }
+                        "
+                    >
+                        {{ $t("pages.home.ui.try_out") }}
+                    </Button>
+                </div>
             </div>
 
-            <div
-                class="col-start-9 col-span-4 row-start-1 row-span-2 flex flex-col justify-center items-end pointer-events-auto"
-            >
-                <Button
-                    class="font-bold"
-                    @click="
-                        () => {
-                            modal.loadComponent({
-                                loader: () =>
-                                    import(
-                                        '~/components/common/settings/modal/CommonSettingsModelModal.vue'
-                                    ),
-                                key: 'settings:model',
-                            });
+            <!-- Footer Section -->
+            <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3">
+                <div class="flex flex-wrap items-center gap-2 pointer-events-auto">
+                    <Button size="sm" @click="Camera.reset()">
+                        <Pointer class="w-4 h-4" />
+                        <RotateCcw class="w-4 h-4" />
+                    </Button>
 
-                            modal.open.value = true;
-                        }
-                    "
-                >
-                    {{ $t("pages.home.ui.try_out") }}
-                </Button>
-            </div>
+                    <CommonSettingsLocale />
 
-            <div
-                class="col-start-1 col-span-4 row-start-12 row-span-1 flex items-end space-x-2 pointer-events-auto"
-            >
-                <Button @click="Camera.reset()">
-                    <Pointer />
-                    <RotateCcw />
-                </Button>
+                    <Button variant="link" as-child size="sm" class="text-xs sm:text-sm">
+                        <NuxtLink :to="$localeRoute({ path: '/about' })">
+                            {{ $t("pages.about.title") }}
+                        </NuxtLink>
+                    </Button>
 
-                <CommonSettingsLocale />
+                    <Button variant="link" as-child size="sm" class="text-xs sm:text-sm">
+                        <NuxtLink :to="$localeRoute({ path: '/metrics' })">
+                            {{ $t("pages.metrics.title") }}
+                        </NuxtLink>
+                    </Button>
+                </div>
 
-                <Button variant="link" as-child>
-                    <NuxtLink :to="$localeRoute({ path: '/about' })">
-                        {{ $t("pages.about.title") }}
-                    </NuxtLink>
-                </Button>
-
-                <Button variant="link" as-child>
-                    <NuxtLink :to="$localeRoute({ path: '/metrics' })">
-                        {{ $t("pages.metrics.title") }}
-                    </NuxtLink>
-                </Button>
-            </div>
-
-            <div
-                class="col-start-9 col-span-4 row-start-11 row-span-2 flex items-end justify-end pointer-events-auto"
-            >
-                <div class="text-xs space-y-1 text-right">
+                <div class="text-xs space-y-1 text-left sm:text-right pointer-events-auto hidden sm:block">
                     <p>{{ $t("pages.home.controls.space") }} 🔼</p>
                     <p>{{ $t("pages.home.controls.planet") }} 🌍</p>
                 </div>

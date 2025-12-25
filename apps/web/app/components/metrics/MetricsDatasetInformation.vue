@@ -59,24 +59,24 @@
 
 <template>
     <Card class="bg-card border-border">
-        <CardHeader>
-            <CardTitle>{{ t("title") }}</CardTitle>
-            <CardDescription>{{ t("description") }}</CardDescription>
+        <CardHeader class="pb-2 sm:pb-6">
+            <CardTitle class="text-base sm:text-lg">{{ t("title") }}</CardTitle>
+            <CardDescription class="text-xs sm:text-sm">{{ t("description") }}</CardDescription>
         </CardHeader>
         <CardContent>
-            <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            <div class="grid gap-2 sm:gap-4 grid-cols-2 md:grid-cols-3">
                 <div
                     v-for="(item, idx) in infoItems"
                     :key="idx"
-                    class="flex items-start gap-3 p-4 rounded-lg bg-muted/30 border border-border"
+                    class="flex items-start gap-2 sm:gap-3 p-3 sm:p-4 rounded-lg bg-muted/30 border border-border"
                 >
-                    <div class="p-2 bg-primary/10 rounded-lg">
-                        <component :is="item.icon" class="h-4 w-4 text-primary" />
+                    <div class="p-1.5 sm:p-2 bg-primary/10 rounded-lg shrink-0">
+                        <component :is="item.icon" class="h-3 w-3 sm:h-4 sm:w-4 text-primary" />
                     </div>
-                    <div class="space-y-1">
-                        <p class="text-xs text-muted-foreground">{{ item.label }}</p>
-                        <p class="text-lg font-bold text-foreground font-mono">{{ item.value }}</p>
-                        <p class="text-xs text-muted-foreground">{{ item.description }}</p>
+                    <div class="space-y-0.5 sm:space-y-1 min-w-0">
+                        <p class="text-[10px] sm:text-xs text-muted-foreground">{{ item.label }}</p>
+                        <p class="text-sm sm:text-lg font-bold text-foreground font-mono truncate">{{ item.value }}</p>
+                        <p class="text-[10px] sm:text-xs text-muted-foreground hidden sm:block">{{ item.description }}</p>
                     </div>
                 </div>
             </div>

@@ -47,22 +47,22 @@
 
 <template>
     <div class="min-h-screen bg-background dark">
-        <div class="container mx-auto px-6 py-12 space-y-6">
-            <div class="flex items-center justify-between">
-                <div class="space-y-2">
-                    <h1 class="text-4xl font-bold tracking-tight text-balance">
+        <div class="container mx-auto px-4 sm:px-6 py-6 sm:py-12 space-y-4 sm:space-y-6">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                <div class="space-y-1 sm:space-y-2">
+                    <h1 class="text-2xl sm:text-4xl font-bold tracking-tight text-balance">
                         {{ t("title") }}
                     </h1>
-                    <p class="text-muted-foreground text-lg">
+                    <p class="text-muted-foreground text-sm sm:text-lg">
                         {{ t("description") }}
                     </p>
                 </div>
 
-                <div class="space-x-2 flex">
-                    <Button variant="outline" as-child>
+                <div class="flex space-x-2">
+                    <Button variant="outline" as-child size="sm" class="sm:size-default">
                         <NuxtLink :to="$localeRoute({ path: '/' })">
-                            <ChevronsLeft class="mr-1" />
-                            {{ t("goBack") }}
+                            <ChevronsLeft class="mr-1 w-4 h-4" />
+                            <span class="text-xs sm:text-sm">{{ t("goBack") }}</span>
                         </NuxtLink>
                     </Button>
                     <CommonSettingsLocale />
@@ -72,7 +72,7 @@
             <template v-if="data">
                 <MetricsOverview :metrics="data?.metrics" />
 
-                <div class="grid gap-6 lg:grid-cols-2">
+                <div class="grid gap-4 sm:gap-6 lg:grid-cols-2">
                     <MetricsConfusionMatrix :confusion-matrix="data.metrics.Confusion_Matrix" />
 
                     <MetricsClasificationReport :report="data.metrics.Classification_Report" />

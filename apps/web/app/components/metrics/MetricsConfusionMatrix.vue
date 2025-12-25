@@ -28,39 +28,39 @@
 
 <template>
     <Card class="bg-card border-border">
-        <CardHeader>
-            <CardTitle>{{ t("title") }}</CardTitle>
-            <CardDescription>{{ t("description") }}</CardDescription>
+        <CardHeader class="pb-2 sm:pb-6">
+            <CardTitle class="text-base sm:text-lg">{{ t("title") }}</CardTitle>
+            <CardDescription class="text-xs sm:text-sm">{{ t("description") }}</CardDescription>
         </CardHeader>
         <CardContent>
-            <div class="space-y-4">
-                <div class="grid grid-cols-2 gap-4">
+            <div class="space-y-3 sm:space-y-4">
+                <div class="grid grid-cols-2 gap-2 sm:gap-4">
                     <div
                         v-for="cell in cells"
                         :key="cell.label"
                         :class="[
-                            'p-6 rounded-lg border-2 flex flex-col items-center justify-center space-y-2',
+                            'p-3 sm:p-6 rounded-lg border-2 flex flex-col items-center justify-center space-y-1 sm:space-y-2',
                             cell.color,
                         ]"
                     >
-                        <p class="text-sm font-medium text-muted-foreground text-center">
+                        <p class="text-[10px] sm:text-sm font-medium text-muted-foreground text-center">
                             {{ cell.label }}
                         </p>
-                        <p class="text-3xl font-bold text-foreground">{{ cell.value }}</p>
-                        <p class="text-xs text-muted-foreground">
+                        <p class="text-xl sm:text-3xl font-bold text-foreground">{{ cell.value }}</p>
+                        <p class="text-[10px] sm:text-xs text-muted-foreground">
                             {{ ((cell.value! / total) * 100).toFixed(1) }}%
                         </p>
                     </div>
                 </div>
 
-                <div class="flex items-center justify-between pt-4 border-t border-border">
+                <div class="flex items-center justify-between pt-3 sm:pt-4 border-t border-border">
                     <div class="text-center">
-                        <p class="text-sm text-muted-foreground">{{ t("predictedNegative") }}</p>
-                        <p class="text-lg font-semibold text-foreground">{{ tn! + fn! }}</p>
+                        <p class="text-[10px] sm:text-sm text-muted-foreground">{{ t("predictedNegative") }}</p>
+                        <p class="text-sm sm:text-lg font-semibold text-foreground">{{ tn! + fn! }}</p>
                     </div>
                     <div class="text-center">
-                        <p class="text-sm text-muted-foreground">{{ t("predictedPositive") }}</p>
-                        <p class="text-lg font-semibold text-foreground">{{ fp! + tp! }}</p>
+                        <p class="text-[10px] sm:text-sm text-muted-foreground">{{ t("predictedPositive") }}</p>
+                        <p class="text-sm sm:text-lg font-semibold text-foreground">{{ fp! + tp! }}</p>
                     </div>
                 </div>
             </div>

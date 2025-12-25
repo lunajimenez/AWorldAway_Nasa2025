@@ -43,19 +43,19 @@
 </script>
 
 <template>
-    <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+    <div class="grid gap-3 sm:gap-4 grid-cols-2 lg:grid-cols-4">
         <template v-for="metric in keyMetrics" :key="metric.label">
-            <Card class="p-6 bg-card border-border hover:border-primary/50 transition-colors">
+            <Card class="p-4 sm:p-6 bg-card border-border hover:border-primary/50 transition-colors">
                 <div class="flex items-start justify-between">
                     <div class="space-y-1">
-                        <p class="text-sm font-medium text-muted-foreground">{{ metric.label }}</p>
-                        <p class="text-3xl font-bold text-primary">
+                        <p class="text-xs sm:text-sm font-medium text-muted-foreground">{{ metric.label }}</p>
+                        <p class="text-xl sm:text-3xl font-bold text-primary">
                             {{ (metric.value * 100).toFixed(2) }}%
                         </p>
-                        <p class="text-xs text-muted-foreground">{{ metric.description }}</p>
+                        <p class="text-[10px] sm:text-xs text-muted-foreground hidden sm:block">{{ metric.description }}</p>
                     </div>
-                    <div class="p-2 bg-primary/10 rounded-lg">
-                        <component :is="metric.icon" class="h-5 w-5 text-primary" />
+                    <div class="p-1.5 sm:p-2 bg-primary/10 rounded-lg">
+                        <component :is="metric.icon" class="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
                     </div>
                 </div>
             </Card>
