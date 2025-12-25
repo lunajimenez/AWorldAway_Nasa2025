@@ -2,6 +2,7 @@
     import { toTypedSchema } from "@vee-validate/zod";
     import { useForm } from "vee-validate";
     import { z } from "zod";
+    import { Eye, Loader2 } from "lucide-vue-next";
 
     const { t } = useI18n();
 
@@ -116,10 +117,54 @@
 
     const isLoading = ref(false);
     const modal = useModal();
+    type PredictionResult = {
+        input_received: Record<string, string>;
+        features_expected: string[];
+        prediction: {
+            dataset?: string | null;
+            object_id?: string | null;
+            pred_confirmed: number;
+            score_confirmed: number;
+        };
+        threshold: number;
+    };
+
+    const LAST_RESULT_KEY = 'exoplanet_last_prediction_result';
+
+    // Load last result from localStorage on mount
+    const loadLastResult = (): PredictionResult | null => {
+        if (import.meta.client) {
+            try {
+                const stored = localStorage.getItem(LAST_RESULT_KEY);
+                if (stored) {
+                    return JSON.parse(stored) as PredictionResult;
+                }
+            } catch (e) {
+                console.error('Error loading last result from localStorage:', e);
+            }
+        }
+        return null;
+    };
+
+    // Save last result to localStorage
+    const saveLastResult = (result: PredictionResult) => {
+        if (import.meta.client) {
+            try {
+                localStorage.setItem(LAST_RESULT_KEY, JSON.stringify(result));
+            } catch (e) {
+                console.error('Error saving last result to localStorage:', e);
+            }
+        }
+    };
+
+    const lastResult = ref<PredictionResult | null>(loadLastResult());
+
+    const { clearInterpretation } = useInterpretationCache();
 
     const {
         public: { apiBase },
     } = useRuntimeConfig();
+    
     const onSubmit = handleSubmit((values) => {
         isLoading.value = true;
 
@@ -131,22 +176,40 @@
                 const { features_expected, prediction, threshold, input_received } =
                     ResponseSchema.parse(response);
 
-                modal.loadComponent({
-                    loader: () => import("@/components/common/modal/CommonPredictionModal.vue"),
-                    key: "prediction:modal",
-                    props: {
-                        result: {
-                            input_received,
-                            features_expected,
-                            prediction,
-                            threshold,
-                        },
-                    },
-                });
+                // Clear cached interpretation for this input
+                clearInterpretation(input_received);
+
+                // Store the result
+                lastResult.value = {
+                    input_received,
+                    features_expected,
+                    prediction,
+                    threshold,
+                };
+                
+                // Persist to localStorage
+                saveLastResult(lastResult.value);
+
+                // Open modal with results (new prediction, so clear interpretation)
+                openResultsModal(true);
             })
             .catch((error) => console.error(error))
             .finally(() => (isLoading.value = false));
     });
+
+    function openResultsModal(isNewPrediction: boolean = false) {
+        if (!lastResult.value) return;
+        
+        modal.loadComponent({
+            loader: () => import("@/components/common/modal/CommonPredictionModal.vue"),
+            key: "prediction:modal",
+            props: {
+                result: lastResult.value,
+                isNewPrediction,
+            },
+        });
+        modal.open.value = true;
+    }
 </script>
 
 <template>
@@ -339,12 +402,37 @@
             </div>
         </div>
 
-        <div class="flex flex-col sm:flex-row gap-2 sm:space-x-2">
-            <Button type="submit" class="grow text-sm sm:text-base" :disabled="isLoading">
-                <span>{{ $t("pages.predict.form.submit") }}</span>
-            </Button>
+        <!-- Action Buttons Section -->
+        <div class="pt-2 sm:pt-4 border-t border-white/10">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
+                <!-- Primary: Predict Button -->
+                <Button 
+                    type="submit" 
+                    class="w-full h-10 sm:h-11 text-xs sm:text-sm font-medium transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]" 
+                    :disabled="isLoading"
+                >
+                    <Loader2 v-if="isLoading" class="w-3.5 h-3.5 sm:w-4 sm:h-4 mr-1.5 sm:mr-2 animate-spin" />
+                    <span>{{ $t("pages.predict.form.submit") }}</span>
+                </Button>
 
-            <CommonSettingsLocale class="sm:grow" />
+                <!-- Secondary: View Results Button (only shows when there's a result) -->
+                <Button 
+                    v-if="lastResult" 
+                    type="button" 
+                    variant="outline"
+                    class="w-full h-10 sm:h-11 text-xs sm:text-sm font-medium gap-1.5 sm:gap-2 transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] border-white/20 hover:border-white/40 hover:bg-white/5"
+                    @click="openResultsModal(false)"
+                >
+                    <Eye class="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                    <span>{{ $t("pages.predict.form.view_results") }}</span>
+                </Button>
+
+                <!-- Language Selector - full width on its own row in mobile when lastResult exists -->
+                <div :class="lastResult ? 'col-span-1 sm:col-span-2' : ''">
+                    <CommonSettingsLocale class="w-full" />
+                </div>
+            </div>
         </div>
     </form>
 </template>
+

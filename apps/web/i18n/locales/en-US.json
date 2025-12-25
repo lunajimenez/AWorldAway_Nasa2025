@@ -142,6 +142,7 @@
                     "tess": "TESS"
                 },
                 "submit": "Predict Confirmation",
+                "view_results": "View Results",
                 "validation": {
                     "required": "This field is required",
                     "positive_number": "Must be a positive number",
@@ -168,6 +169,12 @@
                     "high": "High confidence that this is a genuine exoplanet. The characteristics strongly match confirmed exoplanets.",
                     "medium": "Moderate confidence. Further observation and analysis may be needed to confirm this candidate.",
                     "low": "Low confidence. The signal characteristics suggest this is likely a false positive or instrumental artifact."
+                },
+                "ai_interpretation": {
+                    "title": "AI Interpretation",
+                    "button": "Interpret with AI",
+                    "loading": "Analyzing prediction with AI...",
+                    "retry": "Try again"
                 },
                 "close": "Close"
             }

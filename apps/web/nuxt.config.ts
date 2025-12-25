@@ -35,6 +35,7 @@ export default defineNuxtConfig({
         preset: "node-server",
     },
     runtimeConfig: {
+        groqApiKey: process.env.API_GROP,
         public: {
             apiBase: process.env.API_BASE_URL,
         },
