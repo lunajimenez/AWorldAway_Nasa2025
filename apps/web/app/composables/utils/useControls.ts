@@ -1,4 +1,5 @@
 import {
+    AdditiveBlending,
     AmbientLight,
     BufferAttribute,
     BufferGeometry,
@@ -15,9 +16,89 @@ import {
     Scene,
     SphereGeometry,
     Spherical,
+    SpriteMaterial,
+    Sprite,
     Vector3,
     WebGLRenderer,
 } from "three";
+
+// Floating animation state
+let floatTime = 0;
+const FLOAT_AMPLITUDE = 0.08;
+const FLOAT_SPEED = 0.8;
+
+// Nebula configuration
+const NEBULA_COLORS = [
+    { r: 99, g: 102, b: 241, a: 0.03 },   // Indigo
+    { r: 139, g: 92, b: 246, a: 0.025 },  // Purple
+    { r: 34, g: 211, b: 238, a: 0.02 },   // Cyan
+    { r: 59, g: 130, b: 246, a: 0.02 },   // Blue
+    { r: 168, g: 85, b: 247, a: 0.015 },  // Violet
+];
+
+/**
+ * Creates a nebula texture using canvas gradients
+ */
+function createNebulaTexture(color: { r: number; g: number; b: number; a: number }, size: number): CanvasTexture {
+    const canvas = document.createElement("canvas");
+    canvas.width = size;
+    canvas.height = size;
+    const ctx = canvas.getContext("2d")!;
+
+    // Create radial gradient for soft nebula effect
+    const gradient = ctx.createRadialGradient(
+        size / 2, size / 2, 0,
+        size / 2, size / 2, size / 2
+    );
+
+    gradient.addColorStop(0, `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`);
+    gradient.addColorStop(0.3, `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a * 0.6})`);
+    gradient.addColorStop(0.6, `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a * 0.3})`);
+    gradient.addColorStop(1, "rgba(0, 0, 0, 0)");
+
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, size, size);
+
+    const texture = new CanvasTexture(canvas);
+    return texture;
+}
+
+/**
+ * Creates layered nebula sprites for depth
+ */
+function createNebulae(scene: Scene): void {
+    const nebulaCount = 8;
+
+    for (let i = 0; i < nebulaCount; i++) {
+        const color = NEBULA_COLORS[i % NEBULA_COLORS.length]!;
+        const size = 256 + Math.random() * 256;
+        const texture = createNebulaTexture(color, size);
+
+        const material = new SpriteMaterial({
+            map: texture,
+            transparent: true,
+            blending: AdditiveBlending,
+            depthWrite: false,
+        });
+
+        const sprite = new Sprite(material);
+
+        // Position nebulae at different depths in the background
+        const distance = 80 + Math.random() * 120;
+        const theta = Math.random() * Math.PI * 2;
+        const phi = Math.random() * Math.PI;
+
+        sprite.position.x = distance * Math.sin(phi) * Math.cos(theta);
+        sprite.position.y = distance * Math.sin(phi) * Math.sin(theta);
+        sprite.position.z = distance * Math.cos(phi);
+
+        // Scale based on distance for depth perception
+        const scale = 40 + Math.random() * 60;
+        sprite.scale.set(scale, scale, 1);
+
+        scene.add(sprite);
+    }
+}
 
 export default function () {
     const renderer = shallowRef<WebGLRenderer>();
@@ -249,17 +330,30 @@ export default function () {
 
         Camera.update();
 
+        // Update floating animation
+        floatTime += 0.016; // ~60fps delta
+
         if (planetElement.value) {
-            planetElement.value.rotation.y += 0.005;
-            planetElement.value.rotation.x += 0.002;
+            planetElement.value.rotation.y += 0.003;
+            planetElement.value.rotation.x += 0.001;
+
+            // Subtle floating effect
+            const floatY = Math.sin(floatTime * FLOAT_SPEED) * FLOAT_AMPLITUDE;
+            const floatX = Math.cos(floatTime * FLOAT_SPEED * 0.7) * FLOAT_AMPLITUDE * 0.5;
+            planetElement.value.position.y = floatY;
+            planetElement.value.position.x = floatX;
         }
 
         if (moonsReference.value) {
-            moonsReference.value.forEach((moon) => {
+            moonsReference.value.forEach((moon, index) => {
                 moon.orbitAngle += moon.orbitSpeed;
 
                 moon.mesh.position.x = Math.cos(moon.orbitAngle) * moon.orbitRadius;
                 moon.mesh.position.z = Math.sin(moon.orbitAngle) * moon.orbitRadius;
+
+                // Individual floating for moons
+                const moonFloat = Math.sin(floatTime * FLOAT_SPEED * 1.2 + index) * FLOAT_AMPLITUDE * 0.3;
+                moon.mesh.position.y += moonFloat;
 
                 moon.mesh.rotation.y += 0.003;
             });
@@ -390,21 +484,33 @@ export default function () {
         planetElement.value = _planet;
         _scene.add(_planet);
 
-        const _ambientLight = new AmbientLight(0x404040, 0.3);
+        // Enhanced ambient light with blue tint for space atmosphere
+        const _ambientLight = new AmbientLight(0x1a237e, 0.4);
         _scene.add(_ambientLight);
 
-        // eslint-disable-next-line unicorn/number-literal-case
-        const _directionalLight = new DirectionalLight(0xffffff, 1.2);
-        _directionalLight.position.set(5, 3, 5);
+        // Main directional light - creates dramatic shadows (sun-like)
+        const _directionalLight = new DirectionalLight(0xfff4e6, 1.5);
+        _directionalLight.position.set(8, 4, 6);
         _directionalLight.castShadow = true;
         _directionalLight.shadow.mapSize.width = 2048;
         _directionalLight.shadow.mapSize.height = 2048;
+        _directionalLight.shadow.camera.near = 0.5;
+        _directionalLight.shadow.camera.far = 50;
         _scene.add(_directionalLight);
 
-        // eslint-disable-next-line unicorn/number-literal-case
-        const _pointLight = new PointLight(0xffffff, 0.4, 100);
+        // Rim light - creates atmospheric glow on the dark side
+        const _rimLight = new PointLight(0x4fc3f7, 0.6, 100);
+        _rimLight.position.set(-6, 2, -4);
+        _scene.add(_rimLight);
+
+        // Secondary fill light for depth
+        const _pointLight = new PointLight(0x7c4dff, 0.3, 100);
         _pointLight.position.set(-5, 5, 5);
         _scene.add(_pointLight);
+
+        // === NEBULA SPRITES ===
+        // Create nebula background with layered sprites
+        createNebulae(_scene);
 
         const _starsGeometry = new BufferGeometry();
 

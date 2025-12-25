@@ -124,3 +124,354 @@
         @apply bg-background text-foreground;
     }
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   FUTURISTIC UI DESIGN SYSTEM - A World Away
+   Inspired by Starfield, Linear, and premium space interfaces
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Float Animation - Subtle floating effect for planets */
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    25% {
+        transform: translateY(-8px) rotate(0.5deg);
+    }
+
+    50% {
+        transform: translateY(-4px) rotate(0deg);
+    }
+
+    75% {
+        transform: translateY(-10px) rotate(-0.5deg);
+    }
+}
+
+@keyframes float-slow {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-6px);
+    }
+}
+
+/* Shimmer Effect - For CTA buttons */
+@keyframes shimmer {
+    0% {
+        background-position: -200% center;
+    }
+
+    100% {
+        background-position: 200% center;
+    }
+}
+
+/* Pulse Glow - For atmospheric effects */
+@keyframes pulse-glow {
+
+    0%,
+    100% {
+        opacity: 0.4;
+        filter: blur(20px);
+    }
+
+    50% {
+        opacity: 0.7;
+        filter: blur(25px);
+    }
+}
+
+/* Border Glow Animation */
+@keyframes border-glow {
+
+    0%,
+    100% {
+        border-color: rgba(99, 102, 241, 0.5);
+        box-shadow: 0 0 15px rgba(99, 102, 241, 0.3);
+    }
+
+    50% {
+        border-color: rgba(139, 92, 246, 0.7);
+        box-shadow: 0 0 25px rgba(139, 92, 246, 0.5);
+    }
+}
+
+/* Star Twinkle */
+@keyframes twinkle {
+
+    0%,
+    100% {
+        opacity: 0.3;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+/* Parallax Layer Movement */
+@keyframes parallax-slow {
+    0% {
+        transform: translateX(0) translateY(0);
+    }
+
+    100% {
+        transform: translateX(-50px) translateY(-30px);
+    }
+}
+
+@keyframes parallax-medium {
+    0% {
+        transform: translateX(0) translateY(0);
+    }
+
+    100% {
+        transform: translateX(-100px) translateY(-60px);
+    }
+}
+
+@keyframes parallax-fast {
+    0% {
+        transform: translateX(0) translateY(0);
+    }
+
+    100% {
+        transform: translateX(-150px) translateY(-90px);
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   UTILITY CLASSES
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.animate-float {
+    animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-slow {
+    animation: float-slow 8s ease-in-out infinite;
+}
+
+.animate-shimmer {
+    background: linear-gradient(90deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.1) 25%,
+            rgba(255, 255, 255, 0.3) 50%,
+            rgba(255, 255, 255, 0.1) 75%,
+            transparent 100%);
+    background-size: 200% 100%;
+    animation: shimmer 3s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+    animation: pulse-glow 4s ease-in-out infinite;
+}
+
+.animate-border-glow {
+    animation: border-glow 3s ease-in-out infinite;
+}
+
+.animate-twinkle {
+    animation: twinkle 2s ease-in-out infinite;
+}
+
+/* Glassmorphism Components */
+.glass {
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-light {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-strong {
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* CTA Button - Premium Glassmorphism with Shimmer */
+.btn-cta-primary {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.9) 0%, rgba(139, 92, 246, 0.9) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    padding: 14px 32px;
+    font-weight: 600;
+    font-size: 1rem;
+    color: white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    box-shadow:
+        0 4px 15px rgba(99, 102, 241, 0.4),
+        0 1px 3px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+}
+
+.btn-cta-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(255, 255, 255, 0.3),
+            transparent);
+    transition: left 0.5s ease;
+}
+
+.btn-cta-primary:hover {
+    transform: scale(1.05) translateY(-2px);
+    box-shadow:
+        0 8px 30px rgba(99, 102, 241, 0.6),
+        0 4px 15px rgba(139, 92, 246, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.btn-cta-primary:hover::before {
+    left: 100%;
+}
+
+.btn-cta-primary:active {
+    transform: scale(1.02) translateY(0);
+}
+
+/* Navigation Container - Cockpit Style */
+.nav-cockpit {
+    background: linear-gradient(180deg,
+            rgba(15, 23, 42, 0.7) 0%,
+            rgba(15, 23, 42, 0.5) 100%);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    box-shadow:
+        0 4px 30px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* Responsive adjustments for nav-cockpit */
+@media (max-width: 640px) {
+    .nav-cockpit {
+        border-radius: 12px;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+    }
+}
+
+/* Touch-friendly button sizing on mobile */
+@media (hover: none) and (pointer: coarse) {
+    .btn-cta-primary:hover {
+        transform: none;
+    }
+
+    .btn-cta-primary:active {
+        transform: scale(0.98);
+        box-shadow:
+            0 2px 10px rgba(99, 102, 241, 0.5),
+            0 1px 3px rgba(0, 0, 0, 0.2),
+            inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+
+    .animate-float,
+    .animate-float-slow,
+    .animate-shimmer,
+    .animate-pulse-glow,
+    .animate-border-glow,
+    .animate-twinkle {
+        animation: none;
+    }
+
+    .btn-cta-primary,
+    .btn-cta-primary::before {
+        transition: none;
+    }
+}
+
+/* Text Glow Effect */
+.text-glow {
+    text-shadow:
+        0 0 10px rgba(99, 102, 241, 0.5),
+        0 0 20px rgba(99, 102, 241, 0.3),
+        0 0 40px rgba(99, 102, 241, 0.2);
+}
+
+.text-glow-cyan {
+    text-shadow:
+        0 0 10px rgba(34, 211, 238, 0.5),
+        0 0 20px rgba(34, 211, 238, 0.3),
+        0 0 40px rgba(34, 211, 238, 0.2);
+}
+
+/* Nebula Background Gradients */
+.nebula-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+        radial-gradient(ellipse 80% 60% at 20% 30%, rgba(99, 102, 241, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse 60% 80% at 80% 70%, rgba(139, 92, 246, 0.06) 0%, transparent 50%),
+        radial-gradient(ellipse 50% 50% at 60% 20%, rgba(34, 211, 238, 0.04) 0%, transparent 40%);
+}
+
+/* Planet Atmosphere Glow */
+.planet-glow {
+    box-shadow:
+        0 0 60px rgba(99, 102, 241, 0.3),
+        0 0 120px rgba(99, 102, 241, 0.15),
+        inset -20px -20px 60px rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+}
+
+/* Inner Shadow for Depth */
+.inner-shadow {
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Gradient Border */
+.gradient-border {
+    position: relative;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(139, 92, 246, 0.2));
+    border-radius: 12px;
+}
+
+.gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 12px;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.5), rgba(139, 92, 246, 0.5));
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+}
