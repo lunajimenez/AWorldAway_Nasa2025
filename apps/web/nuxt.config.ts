@@ -32,7 +32,7 @@ export default defineNuxtConfig({
         imports: {
             dirs: ["./shared/utils/**"],
         },
-        preset: "node-server",
+        preset: "vercel",
     },
     runtimeConfig: {
         groqApiKey: process.env.API_GROP,

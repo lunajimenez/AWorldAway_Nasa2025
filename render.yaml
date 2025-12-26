@@ -1,0 +1,16 @@
+# See https://render.com/docs/yaml-spec
+services:
+  # FastAPI Backend
+  - type: web
+    name: aworldaway-api
+    runtime: docker
+    dockerfilePath: ./apps/server/Dockerfile
+    dockerContext: ./apps/server
+    region: oregon
+    plan: free
+    envVars:
+      - key: PORT
+        value: 8000
+      - key: PYTHONPATH
+        value: /app/src
+    healthCheckPath: /health

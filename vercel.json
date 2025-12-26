@@ -1,0 +1,12 @@
+{
+    "buildCommand": "cd apps/web && npm install && npm run build",
+    "outputDirectory": "apps/web/.output/public",
+    "installCommand": "cd apps/web && npm install",
+    "framework": "nuxtjs",
+    "rewrites": [
+        {
+            "source": "/(.*)",
+            "destination": "/"
+        }
+    ]
+}
