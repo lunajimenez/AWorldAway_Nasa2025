@@ -37,22 +37,33 @@ export default function () {
             // Autoplay blocked, will need user interaction
             console.log("Autoplay blocked, waiting for user interaction");
 
-            // Add one-time click listener to start audio
+            // Add listeners for various user interaction events
             const startAudio = async () => {
                 if (audioElement.value && !isPlaying.value) {
                     try {
                         await audioElement.value.play();
                         isPlaying.value = true;
+                        removeListeners();
                     } catch (e) {
                         console.error("Failed to play audio:", e);
                     }
                 }
-                document.removeEventListener("click", startAudio);
-                document.removeEventListener("keydown", startAudio);
             };
 
-            document.addEventListener("click", startAudio, { once: true });
-            document.addEventListener("keydown", startAudio, { once: true });
+            const removeListeners = () => {
+                document.removeEventListener("click", startAudio, true);
+                document.removeEventListener("keydown", startAudio, true);
+                document.removeEventListener("touchstart", startAudio, true);
+                document.removeEventListener("mousedown", startAudio, true);
+                document.removeEventListener("scroll", startAudio, true);
+            };
+
+            // Use capture phase for more reliable event catching
+            document.addEventListener("click", startAudio, { capture: true, once: true });
+            document.addEventListener("keydown", startAudio, { capture: true, once: true });
+            document.addEventListener("touchstart", startAudio, { capture: true, once: true });
+            document.addEventListener("mousedown", startAudio, { capture: true, once: true });
+            document.addEventListener("scroll", startAudio, { capture: true, once: true });
         }
     }
 
