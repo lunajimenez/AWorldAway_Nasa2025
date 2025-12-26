@@ -5,7 +5,8 @@
             "ui": {
                 "title": "A World Away - Nasa 2025",
                 "subtitle": "Identificador de Exoplanetas usando ML",
-                "try_out": "Pruébalo"
+                "try_out": "Pruébalo",
+                "blog": "Visita nuestro Blog"
             },
             "controls": {
                 "mouse": "Click y arrastra para rotar la vista",

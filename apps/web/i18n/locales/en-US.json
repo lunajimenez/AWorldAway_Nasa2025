@@ -5,7 +5,8 @@
             "ui": {
                 "title": "A World Away - Nasa 2025",
                 "subtitle": "ML Exoplanet Identifier",
-                "try_out": "Try it out"
+                "try_out": "Try it out",
+                "blog": "Visit our Blog"
             },
             "controls": {
                 "mouse": "Click and drag to rotate view",

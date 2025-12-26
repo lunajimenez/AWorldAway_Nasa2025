@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import { Pointer, RotateCcw, Rocket, Globe2, ChevronRight, Menu, X, Volume2, VolumeX } from "lucide-vue-next";
+    import { Pointer, RotateCcw, Rocket, Globe2, ChevronRight, Menu, X, Volume2, VolumeX, ExternalLink } from "lucide-vue-next";
 
     definePageMeta({
         title: "pages.home.title",
@@ -114,7 +114,7 @@
                         <!-- Audio Mute Toggle -->
                         <button
                             class="flex items-center justify-center w-9 h-9 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 transition-all duration-200"
-                            :class="spaceAudio.isMuted.value ? 'text-red-400/80' : 'text-white/80'"
+                            :class="spaceAudio.isMuted.value ? 'text-violet-400/80' : 'text-white/80'"
                             @click="spaceAudio.toggleMute()"
                         >
                             <VolumeX v-if="spaceAudio.isMuted.value" class="w-4 h-4" />
@@ -162,6 +162,17 @@
                             >
                                 {{ $t("pages.metrics.title") }}
                             </NuxtLink>
+
+                            <a
+                                href="https://nasa-2025-blog.netlify.app"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="px-4 py-3 rounded-lg text-sm font-medium text-violet-300 hover:text-violet-200 bg-violet-500/20 hover:bg-violet-500/30 border border-violet-400/30 transition-all duration-200 text-center flex items-center justify-center gap-2"
+                                @click="isMobileMenuOpen = false"
+                            >
+                                <ExternalLink class="w-4 h-4" />
+                                {{ $t("pages.home.ui.blog") }}
+                            </a>
                         </div>
                     </Transition>
                 </div>
@@ -182,7 +193,7 @@
                         <!-- Audio Mute Toggle -->
                         <button
                             class="flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 transition-all duration-200"
-                            :class="spaceAudio.isMuted.value ? 'text-red-400/80 hover:text-red-400' : 'text-white/80 hover:text-white'"
+                            :class="spaceAudio.isMuted.value ? 'text-violet-400/80 hover:text-violet-400' : 'text-white/80 hover:text-white'"
                             :title="spaceAudio.isMuted.value ? 'Unmute' : 'Mute'"
                             @click="spaceAudio.toggleMute()"
                         >
@@ -213,6 +224,17 @@
                         >
                             {{ $t("pages.metrics.title") }}
                         </NuxtLink>
+
+                        <!-- Blog Link (External) -->
+                        <a
+                            href="https://nasa-2025-blog.netlify.app"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg text-xs sm:text-sm font-medium text-violet-400/80 hover:text-violet-300 hover:bg-violet-500/10 transition-all duration-200 flex items-center gap-1.5 group"
+                        >
+                            {{ $t("pages.home.ui.blog") }}
+                            <ExternalLink class="w-3 h-3 opacity-60 group-hover:opacity-100 transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                        </a>
                     </nav>
 
                     <!-- Controls Hint - Hidden on small tablets, visible on larger screens -->

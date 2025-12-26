@@ -69,13 +69,13 @@
                         v-for="(row, idx) in rows"
                         :key="idx"
                         :class="[
-                            'grid grid-cols-5 gap-2 py-2 sm:py-3 rounded-lg items-center',
-                            row.highlight ? 'bg-primary/5 px-2' : '',
+                            'grid grid-cols-5 gap-2 py-2 sm:py-3 rounded-lg items-center transition-all duration-200 hover:bg-primary/10 cursor-default',
+                            row.highlight ? 'bg-primary/5 px-2' : 'hover:pl-2',
                         ]"
                     >
                         <div
                             :class="[
-                                'text-xs sm:text-sm font-medium truncate',
+                                'text-xs sm:text-sm font-medium truncate transition-colors',
                                 row.highlight ? 'text-primary' : 'text-foreground',
                             ]"
                         >

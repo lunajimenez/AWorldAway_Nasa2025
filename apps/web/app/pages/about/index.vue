@@ -122,6 +122,14 @@
         }, 150);
     };
 
+    const handleImageError = (e: Event) => {
+        const img = e.target as HTMLImageElement;
+        const member = currentMember.value;
+        if (member) {
+            img.src = `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(member.name)}&backgroundColor=6366f1`;
+        }
+    };
+
     const stars = Array.from({ length: CONSTANTS.HOME.STARS_COUNT }).map(() => ({
         width: Math.random() * 2 + 1,
         height: Math.random() * 2 + 1,
@@ -153,9 +161,9 @@
         <nav class="relative z-10 p-4 flex justify-between items-center">
             <NuxtLink
                 :to="$localeRoute({ path: '/' })"
-                class="inline-flex items-center gap-2 text-white/70 hover:text-white transition-colors"
+                class="inline-flex items-center gap-2 text-white/70 hover:text-violet-400 transition-all duration-300 group"
             >
-                <ChevronLeft :size="20" />
+                <ChevronLeft :size="20" class="transition-transform group-hover:-translate-x-1" />
                 {{ $t("pages.about.navigation.back") }}
             </NuxtLink>
 
@@ -224,9 +232,9 @@
                                 :href="currentMember.url"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                class="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors mt-2"
+                                class="inline-flex items-center gap-2 text-violet-400 hover:text-violet-300 transition-colors mt-2 group"
                             >
-                                <ExternalLink :size="18" />
+                                <ExternalLink :size="18" class="transition-transform group-hover:translate-x-0.5" />
                                 <span>LinkedIn</span>
                             </NuxtLink>
                         </div>
@@ -238,6 +246,7 @@
                                     :src="currentMember.image"
                                     :alt="currentMember.name"
                                     loading="lazy"
+                                    @error="handleImageError"
                                 />
                             </figure>
                         </div>
@@ -325,7 +334,7 @@
 
     .member-roles {
         font-size: 1rem;
-        color: rgb(96 165 250);
+        color: rgb(167 139 250);
         font-weight: 600;
     }
 
@@ -371,7 +380,9 @@
     }
 
     .photo-frame:hover {
-        transform: rotate(0deg) scale(1.02);
+        transform: rotate(0deg) scale(1.05);
+        box-shadow: 0 0 30px rgba(139, 92, 246, 0.3), 0 10px 25px -5px rgba(0, 0, 0, 0.2);
+        border-color: rgba(139, 92, 246, 0.5);
     }
 
     @media (min-width: 1024px) {
@@ -412,9 +423,10 @@
     }
 
     .carousel-button:hover {
-        background: rgb(96 165 250);
+        background: rgb(139 92 246);
         color: white;
         transform: scale(1.1);
+        box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
     }
 
     .carousel-button:active {
@@ -439,14 +451,14 @@
     }
 
     .dot:hover {
-        background: rgba(255, 255, 255, 0.4);
+        background: rgba(167, 139, 250, 0.6);
         transform: scale(1.2);
     }
 
     .dot.active {
         width: 24px;
         border-radius: 12px;
-        background: rgb(96 165 250);
+        background: rgb(139 92 246);
     }
 
     /* Mobile Adjustments */
@@ -465,7 +477,7 @@
     /* Accessibility */
     .carousel-button:focus-visible,
     .dot:focus-visible {
-        outline: 2px solid rgb(96 165 250);
+        outline: 2px solid rgb(139 92 246);
         outline-offset: 2px;
     }
 </style>

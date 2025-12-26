@@ -39,7 +39,7 @@
                         v-for="cell in cells"
                         :key="cell.label"
                         :class="[
-                            'p-3 sm:p-6 rounded-lg border-2 flex flex-col items-center justify-center space-y-1 sm:space-y-2',
+                            'p-3 sm:p-6 rounded-lg border-2 flex flex-col items-center justify-center space-y-1 sm:space-y-2 transition-all duration-300 hover:scale-105 hover:shadow-lg cursor-default',
                             cell.color,
                         ]"
                     >

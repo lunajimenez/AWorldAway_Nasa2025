@@ -59,9 +59,9 @@
                 </div>
 
                 <div class="flex space-x-2">
-                    <Button variant="outline" as-child size="sm" class="sm:size-default">
+                    <Button variant="outline" as-child size="sm" class="sm:size-default group hover:border-primary/50 transition-all duration-300">
                         <NuxtLink :to="$localeRoute({ path: '/' })">
-                            <ChevronsLeft class="mr-1 w-4 h-4" />
+                            <ChevronsLeft class="mr-1 w-4 h-4 transition-transform group-hover:-translate-x-1" />
                             <span class="text-xs sm:text-sm">{{ t("goBack") }}</span>
                         </NuxtLink>
                     </Button>

@@ -68,13 +68,13 @@
                 <div
                     v-for="(item, idx) in infoItems"
                     :key="idx"
-                    class="flex items-start gap-2 sm:gap-3 p-3 sm:p-4 rounded-lg bg-muted/30 border border-border"
+                    class="flex items-start gap-2 sm:gap-3 p-3 sm:p-4 rounded-lg bg-muted/30 border border-border hover:border-primary/50 hover:bg-muted/50 transition-all duration-300 cursor-default group"
                 >
-                    <div class="p-1.5 sm:p-2 bg-primary/10 rounded-lg shrink-0">
+                    <div class="p-1.5 sm:p-2 bg-primary/10 rounded-lg shrink-0 group-hover:bg-primary/20 group-hover:scale-110 transition-all duration-300">
                         <component :is="item.icon" class="h-3 w-3 sm:h-4 sm:w-4 text-primary" />
                     </div>
                     <div class="space-y-0.5 sm:space-y-1 min-w-0">
-                        <p class="text-[10px] sm:text-xs text-muted-foreground">{{ item.label }}</p>
+                        <p class="text-[10px] sm:text-xs text-muted-foreground group-hover:text-foreground/70 transition-colors">{{ item.label }}</p>
                         <p class="text-sm sm:text-lg font-bold text-foreground font-mono truncate">{{ item.value }}</p>
                         <p class="text-[10px] sm:text-xs text-muted-foreground hidden sm:block">{{ item.description }}</p>
                     </div>
