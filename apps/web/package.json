@@ -2,6 +2,13 @@
     "name": "@source/apps-web",
     "type": "module",
     "private": true,
+    "scripts": {
+        "dev": "nuxi dev",
+        "build": "nuxi build",
+        "generate": "nuxi generate",
+        "preview": "nuxi preview",
+        "postinstall": "nuxi prepare"
+    },
     "dependencies": {
         "@nuxt/eslint": "1.9.0",
         "@nuxt/fonts": "0.11.4",
