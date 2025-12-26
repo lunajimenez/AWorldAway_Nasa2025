@@ -7,7 +7,7 @@ export const CONSTANTS = {
     HOME: {
         STARS_COUNT: 1000,
         MIN_LOADING_TIME: 1500,
-        MOON_COUNT: 1,
+        MOON_COUNT: 3,
     },
 } as const;
 
