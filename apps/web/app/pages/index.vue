@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import { Pointer, RotateCcw, Rocket, Globe2, ChevronRight, Menu, X } from "lucide-vue-next";
+    import { Pointer, RotateCcw, Rocket, Globe2, ChevronRight, Menu, X, Volume2, VolumeX } from "lucide-vue-next";
 
     definePageMeta({
         title: "pages.home.title",
@@ -11,6 +11,9 @@
 
     const mountReference = useTemplateRef("MountRef");
     const { init, cleanup, Camera } = useControls();
+    
+    // Space ambient audio
+    const spaceAudio = useSpaceAudio();
 
     // Mobile menu state
     const isMobileMenuOpen = ref(false);
@@ -18,6 +21,9 @@
     onMounted(() => {
         nextTick(async () => {
             init(mountReference.value);
+            
+            // Initialize space audio
+            spaceAudio.init();
 
             await hideLoading();
         });
@@ -25,6 +31,7 @@
 
     onUnmounted(() => {
         cleanup(mountReference.value);
+        spaceAudio.cleanup();
     });
 </script>
 
@@ -104,6 +111,16 @@
                             <RotateCcw class="w-4 h-4" />
                         </button>
 
+                        <!-- Audio Mute Toggle -->
+                        <button
+                            class="flex items-center justify-center w-9 h-9 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 transition-all duration-200"
+                            :class="spaceAudio.isMuted.value ? 'text-red-400/80' : 'text-white/80'"
+                            @click="spaceAudio.toggleMute()"
+                        >
+                            <VolumeX v-if="spaceAudio.isMuted.value" class="w-4 h-4" />
+                            <Volume2 v-else class="w-4 h-4" />
+                        </button>
+
                         <!-- Language Selector -->
                         <CommonSettingsLocale />
 
@@ -160,6 +177,17 @@
                         >
                             <Pointer class="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                             <RotateCcw class="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                        </button>
+
+                        <!-- Audio Mute Toggle -->
+                        <button
+                            class="flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 transition-all duration-200"
+                            :class="spaceAudio.isMuted.value ? 'text-red-400/80 hover:text-red-400' : 'text-white/80 hover:text-white'"
+                            :title="spaceAudio.isMuted.value ? 'Unmute' : 'Mute'"
+                            @click="spaceAudio.toggleMute()"
+                        >
+                            <VolumeX v-if="spaceAudio.isMuted.value" class="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                            <Volume2 v-else class="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                         </button>
 
                         <!-- Divider -->
