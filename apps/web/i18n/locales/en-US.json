@@ -148,7 +148,15 @@
                     "required": "This field is required",
                     "positive_number": "Must be a positive number",
                     "stellar_temp_min": "Stellar temperature must be at least 1000 K",
-                    "select_mission": "Please select a mission"
+                    "select_mission": "Please select a mission",
+                    "orbital_period_range": "Orbital period must be between 0.45 and 570 days",
+                    "transit_duration_range": "Transit duration must be between 0.49 and 23 hours",
+                    "planet_radius_range": "Planet radius must be between 0.59 and 156 Earth radii",
+                    "equilibrium_temp_range": "Temperature must be between 0 and 29,339 K",
+                    "transit_depth_range": "Transit depth must be between 0 and 357,953 ppm",
+                    "insolation_flux_range": "Insolation flux must be between 0 and 40,519 S⊕",
+                    "stellar_radius_range": "Stellar radius must be between 0.25 and 8.06 R☉",
+                    "stellar_temp_range": "Stellar temperature must be between 3,218 and 8,992 K"
                 }
             },
             "success": "Prediction completed successfully!",

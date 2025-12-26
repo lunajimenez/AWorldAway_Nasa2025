@@ -148,7 +148,15 @@
                     "required": "Este campo es obligatorio",
                     "positive_number": "Debe ser un número positivo",
                     "stellar_temp_min": "La temperatura estelar debe ser al menos 1000 K",
-                    "select_mission": "Por favor selecciona una misión"
+                    "select_mission": "Por favor selecciona una misión",
+                    "orbital_period_range": "El período orbital debe estar entre 0.45 y 570 días",
+                    "transit_duration_range": "La duración del tránsito debe estar entre 0.49 y 23 horas",
+                    "planet_radius_range": "El radio del planeta debe estar entre 0.59 y 156 radios terrestres",
+                    "equilibrium_temp_range": "La temperatura debe estar entre 0 y 29,339 K",
+                    "transit_depth_range": "La profundidad del tránsito debe estar entre 0 y 357,953 ppm",
+                    "insolation_flux_range": "El flujo de insolación debe estar entre 0 y 40,519 S⊕",
+                    "stellar_radius_range": "El radio estelar debe estar entre 0.25 y 8.06 R☉",
+                    "stellar_temp_range": "La temperatura estelar debe estar entre 3,218 y 8,992 K"
                 }
             },
             "success": "¡Predicción completada exitosamente!",

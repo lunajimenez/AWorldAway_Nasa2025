@@ -17,82 +17,82 @@
     const Schema = computed(() =>
         z.object({
             orbital_period_days: z.coerce
-                .number()
-                .min(0.4518373720000007, t("pages.predict.form.validation.required"))
-                .max(569.9815810000001, t("pages.predict.form.validation.required"))
+                .number({ error: t("pages.predict.form.validation.required") })
+                .min(0.4518373720000007, { message: t("pages.predict.form.validation.orbital_period_range") })
+                .max(569.9815810000001, { message: t("pages.predict.form.validation.orbital_period_range") })
                 .refine(
                     (val) => !isNaN(val) && val > 0,
-                    t("pages.predict.form.validation.positive_number"),
+                    { message: t("pages.predict.form.validation.positive_number") },
                 )
                 .default(365.25),
 
             transit_duration_hours: z.coerce
-                .number()
-                .min(0.4853028172653019, t("pages.predict.form.validation.required"))
-                .max(22.98957577832262, t("pages.predict.form.validation.required"))
+                .number({ error: t("pages.predict.form.validation.required") })
+                .min(0.4853028172653019, { message: t("pages.predict.form.validation.transit_duration_range") })
+                .max(22.98957577832262, { message: t("pages.predict.form.validation.transit_duration_range") })
                 .refine(
                     (val) => !isNaN(val) && val > 0,
-                    t("pages.predict.form.validation.positive_number"),
+                    { message: t("pages.predict.form.validation.positive_number") },
                 )
                 .default(13.5),
 
             planet_radius_earth: z.coerce
-                .number()
-                .min(0.59, t("pages.predict.form.validation.required"))
-                .max(156.00040000000044, t("pages.predict.form.validation.required"))
+                .number({ error: t("pages.predict.form.validation.required") })
+                .min(0.59, { message: t("pages.predict.form.validation.planet_radius_range") })
+                .max(156.00040000000044, { message: t("pages.predict.form.validation.planet_radius_range") })
                 .refine(
                     (val) => !isNaN(val) && val > 0,
-                    t("pages.predict.form.validation.positive_number"),
+                    { message: t("pages.predict.form.validation.positive_number") },
                 )
                 .default(1.0),
 
             equilibrium_temperature_K: z.coerce
-                .number()
-                .min(0.0, t("pages.predict.form.validation.required"))
-                .max(29339.3904417822, t("pages.predict.form.validation.required"))
+                .number({ error: t("pages.predict.form.validation.required") })
+                .min(0.0, { message: t("pages.predict.form.validation.equilibrium_temp_range") })
+                .max(29339.3904417822, { message: t("pages.predict.form.validation.equilibrium_temp_range") })
                 .refine(
                     (val) => !isNaN(val) && val > 0,
-                    t("pages.predict.form.validation.positive_number"),
+                    { message: t("pages.predict.form.validation.positive_number") },
                 )
                 .default(288),
 
             transit_depth_ppm: z.coerce
-                .number()
-                .min(0.0, t("pages.predict.form.validation.required"))
-                .max(357953.2000000003, t("pages.predict.form.validation.required"))
+                .number({ error: t("pages.predict.form.validation.required") })
+                .min(0.0, { message: t("pages.predict.form.validation.transit_depth_range") })
+                .max(357953.2000000003, { message: t("pages.predict.form.validation.transit_depth_range") })
                 .refine(
                     (val) => !isNaN(val) && val > 0,
-                    t("pages.predict.form.validation.positive_number"),
+                    { message: t("pages.predict.form.validation.positive_number") },
                 )
                 .default(84),
 
             insolation_flux_Earth: z.coerce
-                .number()
-                .min(0.0, t("pages.predict.form.validation.required"))
-                .max(40519.208836177786, t("pages.predict.form.validation.required"))
+                .number({ error: t("pages.predict.form.validation.required") })
+                .min(0.0, { message: t("pages.predict.form.validation.insolation_flux_range") })
+                .max(40519.208836177786, { message: t("pages.predict.form.validation.insolation_flux_range") })
                 .refine(
                     (val) => !isNaN(val) && val > 0,
-                    t("pages.predict.form.validation.positive_number"),
+                    { message: t("pages.predict.form.validation.positive_number") },
                 )
                 .default(1.0),
 
             stellar_radius_solar: z.coerce
-                .number()
-                .min(0.25, t("pages.predict.form.validation.required"))
-                .max(8.055360000000007, t("pages.predict.form.validation.required"))
+                .number({ error: t("pages.predict.form.validation.required") })
+                .min(0.25, { message: t("pages.predict.form.validation.stellar_radius_range") })
+                .max(8.055360000000007, { message: t("pages.predict.form.validation.stellar_radius_range") })
                 .refine(
                     (val) => !isNaN(val) && val > 0,
-                    t("pages.predict.form.validation.positive_number"),
+                    { message: t("pages.predict.form.validation.positive_number") },
                 )
                 .default(1.0),
 
             stellar_temperature_K: z.coerce
-                .number()
-                .min(3217.52, t("pages.predict.form.validation.required"))
-                .max(8991.560000000001, t("pages.predict.form.validation.required"))
+                .number({ error: t("pages.predict.form.validation.required") })
+                .min(3217.52, { message: t("pages.predict.form.validation.stellar_temp_range") })
+                .max(8991.560000000001, { message: t("pages.predict.form.validation.stellar_temp_range") })
                 .refine(
                     (val) => !isNaN(val) && val >= 1000,
-                    t("pages.predict.form.validation.stellar_temp_min"),
+                    { message: t("pages.predict.form.validation.stellar_temp_min") },
                 )
                 .default(5778),
         }),
