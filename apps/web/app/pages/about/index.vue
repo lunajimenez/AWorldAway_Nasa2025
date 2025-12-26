@@ -24,7 +24,7 @@
             nickname: "Lunita",
             roles: ["pages.about.team.roles.team_leader", "pages.about.team.roles.data_scientist"],
             url: "https://www.linkedin.com/in/luna-katalina-quintero-jimenez/",
-            image: "https://media.licdn.com/dms/image/v2/D5603AQGcTMaVghQq1w/profile-displayphoto-shrink_200_200/B56ZSwQwXzGoAY-/0/1738123971155?e=1762387200&v=beta&t=WfEMLUVqAWzTZA1QHX1hyHSmI2Tj1MOoc6_QaHSBJtM",
+            image: "/images/team/luna.jpg",
             description: [
                 "pages.about.team.members.luna.bio.p1",
                 "pages.about.team.members.luna.bio.p2",
@@ -37,7 +37,7 @@
             nickname: "Cami",
             roles: ["pages.about.team.roles.data_scientist"],
             url: "https://www.linkedin.com/in/maria-camila-garc%C3%ADa-salazar-469362241/",
-            image: "https://media.licdn.com/dms/image/v2/D4E03AQHkwAssLRrCmQ/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1731373466176?e=1762387200&v=beta&t=No_k4s4CTfi7nCDQAbqy50YF6KfC9-uauX5j4ksf_og",
+            image: "/images/team/María.jpg",
             description: [
                 "pages.about.team.members.cami.bio.p1",
                 "pages.about.team.members.cami.bio.p2",
@@ -50,7 +50,7 @@
             nickname: "Leo",
             roles: ["pages.about.team.roles.frontend_developer"],
             url: "https://www.linkedin.com/in/leonardo-gonzalez-castillo-a94098256/",
-            image: "https://media.licdn.com/dms/image/v2/D4E03AQG4samTV8NNOg/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1731382900691?e=1762387200&v=beta&t=ytjg6wlxVAP2Ku5Mr-oEWo7lCSFKqKSM8LeLkb_RPzU",
+            image: "/images/team/Leonardo.jpg",
             description: [
                 "pages.about.team.members.leo.bio.p1",
                 "pages.about.team.members.leo.bio.p2",
@@ -63,7 +63,7 @@
             nickname: "Maic",
             roles: ["pages.about.team.roles.data_scientist"],
             url: "https://www.linkedin.com/in/michael-andr%C3%A9s-taboada-naranjo-0263171b1/",
-            image: "https://media.licdn.com/dms/image/v2/D5635AQHjKqOpGIlO6A/profile-framedphoto-shrink_200_200/profile-framedphoto-shrink_200_200/0/1713925488966?e=1760295600&v=beta&t=aavL6ghnxDdjr9zDeq0G5FnWqVHHp1Pqyxx70PJvTGE",
+            image: "/images/team/michael.jpg",
             description: [
                 "pages.about.team.members.maic.bio.p1",
                 "pages.about.team.members.maic.bio.p2",
@@ -79,7 +79,7 @@
                 "pages.about.team.roles.data_scientist",
             ],
             url: "https://www.linkedin.com/in/mauro-gonzalez-figueroa/",
-            image: "https://media.licdn.com/dms/image/v2/D4E03AQF-9kGeaEA8zg/profile-displayphoto-scale_200_200/B4EZmMIMO4KQAY-/0/1758992583063?e=1762387200&v=beta&t=bmbw8AAHnhNQYKvNx1fVjuImv2AdOUs2Kn0tXZEPs-I",
+            image: "/images/team/mauro.png",
             description: [
                 "pages.about.team.members.mau.bio.p1",
                 "pages.about.team.members.mau.bio.p2",

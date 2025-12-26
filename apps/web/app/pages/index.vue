@@ -230,10 +230,11 @@
                             href="https://nasa-2025-blog.netlify.app"
                             target="_blank"
                             rel="noopener noreferrer"
-                            class="px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg text-xs sm:text-sm font-medium text-violet-400/80 hover:text-violet-300 hover:bg-violet-500/10 transition-all duration-200 flex items-center gap-1.5 group"
+                            class="px-2.5 py-1.5 sm:px-3 sm:py-2 lg:px-4 rounded-lg text-xs sm:text-sm font-medium text-violet-400/80 hover:text-violet-300 hover:bg-violet-500/10 transition-all duration-200 flex items-center gap-1.5 group"
+                            :title="$t('pages.home.ui.blog')"
                         >
-                            {{ $t("pages.home.ui.blog") }}
-                            <ExternalLink class="w-3 h-3 opacity-60 group-hover:opacity-100 transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                            <span class="hidden lg:inline">{{ $t("pages.home.ui.blog") }}</span>
+                            <ExternalLink class="w-3.5 h-3.5 sm:w-4 sm:h-4 lg:w-3 lg:h-3 opacity-80 group-hover:opacity-100 transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                         </a>
                     </nav>
 
