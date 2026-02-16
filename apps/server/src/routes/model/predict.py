@@ -97,7 +97,11 @@ def predict_one(request: Request):
     - insolation_flux_Earth: float
     - stellar_radius_solar: float
     - stellar_temperature_K: float
-    - source_mission: str (Kepler, K2, TESS)
+    - signal_to_noise: float
+    - koi_fpflag_nt: float (0/1)
+    - koi_fpflag_ss: float (0/1)
+    - koi_fpflag_co: float (0/1)
+    - koi_fpflag_ec: float (0/1)
     """
 
     if not model_service.is_loaded:
@@ -107,11 +111,16 @@ def predict_one(request: Request):
 
     try:
         params = dict(request.query_params)
-
-        if "source_mission" not in params:
-            params["source_mission"] = "Kepler"
-
+        
+        # Filtrar solo las features que espera el modelo
         features = {k: v for k, v in params.items() if k in model_service.feature_cols}
+        
+        # Asegurarse de que todas las features requeridas estén presentes (rellenar con defaults si faltan)
+        # Esto es útil si el frontend no envía todo
+        for col in model_service.feature_cols:
+            if col not in features:
+                # Valores por defecto seguros para evitar crash
+                features[col] = 0.0
 
         df = pd.DataFrame([features])
 
