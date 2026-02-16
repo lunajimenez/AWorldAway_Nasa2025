@@ -88,7 +88,8 @@
                     "planet": "Propiedades del Planeta",
                     "transit": "Señal de Tránsito",
                     "stellar": "Propiedades Estelares",
-                    "mission": "Datos de Misión"
+                    "mission": "Datos de Misión",
+                    "flags": "Banderas de Falso Positivo"
                 },
                 "fields": {
                     "orbital_period": {
@@ -135,6 +136,27 @@
                         "label": "Misión de Origen",
                         "placeholder": "Selecciona una misión",
                         "description": "Telescopio espacial que descubrió el candidato"
+                    },
+                    "signal_to_noise": {
+                        "label": "Relación Señal/Ruido",
+                        "placeholder": "ej., 20.5",
+                        "description": "Relación señal/ruido del tránsito"
+                    },
+                    "koi_fpflag_nt": {
+                        "label": "No Similar a Tránsito",
+                        "description": "Marcado si la curva de luz no es consistente con un planeta en tránsito"
+                    },
+                    "koi_fpflag_ss": {
+                        "label": "Eclipse Estelar",
+                        "description": "Marcado si el evento es un eclipse estelar (eclipse secundario)"
+                    },
+                    "koi_fpflag_co": {
+                        "label": "Desplazamiento del Centroide",
+                        "description": "Marcado si la fuente del tránsito está desplazada de la estrella objetivo"
+                    },
+                    "koi_fpflag_ec": {
+                        "label": "Coincidencia de Efemérides",
+                        "description": "Marcado si el tránsito comparte período/época con otro objeto"
                     }
                 },
                 "missions": {

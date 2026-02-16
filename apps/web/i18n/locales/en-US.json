@@ -88,7 +88,8 @@
                     "planet": "Planet Properties",
                     "transit": "Transit Signal",
                     "stellar": "Stellar Properties",
-                    "mission": "Mission Data"
+                    "mission": "Mission Data",
+                    "flags": "False Positive Flags"
                 },
                 "fields": {
                     "orbital_period": {
@@ -135,6 +136,27 @@
                         "label": "Source Mission",
                         "placeholder": "Select a mission",
                         "description": "Space telescope mission that discovered the candidate"
+                    },
+                    "signal_to_noise": {
+                        "label": "Signal-to-Noise Ratio",
+                        "placeholder": "e.g., 20.5",
+                        "description": "Transit signal-to-noise ratio"
+                    },
+                    "koi_fpflag_nt": {
+                        "label": "Not Transit-Like",
+                        "description": "Flag set if the light curve is not consistent with a transiting planet"
+                    },
+                    "koi_fpflag_ss": {
+                        "label": "Stellar Eclipse",
+                        "description": "Flag set if the transit event is a stellar eclipse (secondary eclipse)"
+                    },
+                    "koi_fpflag_co": {
+                        "label": "Centroid Offset",
+                        "description": "Flag set if the transit source is offset from the target star"
+                    },
+                    "koi_fpflag_ec": {
+                        "label": "Ephemeris Match",
+                        "description": "Flag set if the transit shares the same period/epoch as another object"
                     }
                 },
                 "missions": {
