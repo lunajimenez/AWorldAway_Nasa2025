@@ -1,0 +1,141 @@
+{
+  "experiment": "koi_score_impact_analysis",
+  "with_koi_score": {
+    "model_name": "CON_koi_score",
+    "ROC_AUC": 0.9850000534162353,
+    "PR_AUC": 0.957432723386436,
+    "Best_Threshold_F1": 0.3433333333333333,
+    "Accuracy": 0.9466806063774177,
+    "Macro_F1": 0.9360160387826895,
+    "Confusion_Matrix": [
+      [
+        1296,
+        68
+      ],
+      [
+        34,
+        515
+      ]
+    ],
+    "Classification_Report": {
+      "NOT_CONFIRMED": {
+        "precision": 0.9744360902255639,
+        "recall": 0.9501466275659824,
+        "f1-score": 0.9621380846325167,
+        "support": 1364.0
+      },
+      "CONFIRMED": {
+        "precision": 0.8833619210977701,
+        "recall": 0.9380692167577414,
+        "f1-score": 0.9098939929328622,
+        "support": 549.0
+      },
+      "accuracy": 0.9466806063774177,
+      "macro avg": {
+        "precision": 0.928899005661667,
+        "recall": 0.9441079221618619,
+        "f1-score": 0.9360160387826895,
+        "support": 1913.0
+      },
+      "weighted avg": {
+        "precision": 0.9482992795349424,
+        "recall": 0.9466806063774177,
+        "f1-score": 0.9471448769257158,
+        "support": 1913.0
+      }
+    },
+    "N_features_numeric": 14,
+    "N_features_categorical": 0,
+    "features_used": [
+      "koi_period",
+      "koi_duration",
+      "koi_prad",
+      "koi_teq",
+      "koi_insol",
+      "koi_srad",
+      "koi_steff",
+      "koi_depth",
+      "koi_model_snr",
+      "koi_score",
+      "koi_fpflag_nt",
+      "koi_fpflag_ss",
+      "koi_fpflag_co",
+      "koi_fpflag_ec"
+    ]
+  },
+  "without_koi_score": {
+    "model_name": "SIN_koi_score",
+    "ROC_AUC": 0.9827799411353086,
+    "PR_AUC": 0.9523053112997997,
+    "Best_Threshold_F1": 0.43333333333333335,
+    "Accuracy": 0.9451123889179299,
+    "Macro_F1": 0.9327574034144035,
+    "Confusion_Matrix": [
+      [
+        1314,
+        50
+      ],
+      [
+        55,
+        494
+      ]
+    ],
+    "Classification_Report": {
+      "NOT_CONFIRMED": {
+        "precision": 0.9598246895544192,
+        "recall": 0.9633431085043989,
+        "f1-score": 0.9615806805708014,
+        "support": 1364.0
+      },
+      "CONFIRMED": {
+        "precision": 0.9080882352941176,
+        "recall": 0.8998178506375227,
+        "f1-score": 0.9039341262580055,
+        "support": 549.0
+      },
+      "accuracy": 0.9451123889179299,
+      "macro avg": {
+        "precision": 0.9339564624242684,
+        "recall": 0.9315804795709608,
+        "f1-score": 0.9327574034144035,
+        "support": 1913.0
+      },
+      "weighted avg": {
+        "precision": 0.9449771655664916,
+        "recall": 0.9451123889179299,
+        "f1-score": 0.9450370536404695,
+        "support": 1913.0
+      }
+    },
+    "N_features_numeric": 13,
+    "N_features_categorical": 0,
+    "features_used": [
+      "koi_period",
+      "koi_duration",
+      "koi_prad",
+      "koi_teq",
+      "koi_insol",
+      "koi_srad",
+      "koi_steff",
+      "koi_depth",
+      "koi_model_snr",
+      "koi_fpflag_nt",
+      "koi_fpflag_ss",
+      "koi_fpflag_co",
+      "koi_fpflag_ec"
+    ]
+  },
+  "differences": {
+    "ROC_AUC_diff": 0.002220112280926667,
+    "PR_AUC_diff": 0.005127412086636363,
+    "Accuracy_diff": 0.001568217459487764,
+    "Macro_F1_diff": 0.003258635368285967,
+    "ROC_AUC_pct": 0.22590126110652917,
+    "PR_AUC_pct": 0.5384210321832572,
+    "Accuracy_pct": 0.16592920353982815,
+    "Macro_F1_pct": 0.3493550795048718,
+    "avg_impact_pct": 0.3199016440836216
+  },
+  "verdict": "\u2705 EXCELENTE - Sin data leakage significativo",
+  "interpretation": "El modelo funciona casi igual con y sin koi_score (<1% diferencia).\nEsto indica que:\n\u2022 Las otras features son suficientemente predictivas\n\u2022 koi_score NO est\u00e1 causando data leakage cr\u00edtico\n\u2022 El modelo aprende patrones reales de los datos\n\nRECOMENDACI\u00d3N: Puedes usar koi_score con confianza."
+}
