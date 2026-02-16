@@ -18,9 +18,9 @@ tasks:
         command: uv
         args: 
             - run
-            - scripts/ML.py
+            - scripts/koi_ml.py
             - --csv
-            - data/processed/FinalDataHarmonization.csv
+            - data/processed/KOI_All_Filtrated.csv
             - --test-size
             - "0.2"
             - --seed

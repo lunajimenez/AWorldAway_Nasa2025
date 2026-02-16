@@ -161,7 +161,6 @@ def train_from_harmonized(
     outdir.mkdir(parents=True, exist_ok=True)
 
     print(f"Loading data from: {csv_path}")
-    print("⚙️  Modelo configurado SIN koi_score (basado en experimento: solo +0.32% mejora)")
     df = pd.read_csv(csv_path, low_memory=False)
     
     # Rename columns to match user request and align with KOI_All_Filtrated.csv
@@ -344,8 +343,6 @@ def train_from_harmonized(
 
     # ===== PRINT FINAL =====
     print("\n" + "="*60)
-    print("MODELO ENTRENADO SIN koi_score")
-    print("="*60)
     print(
         json.dumps(
             {
@@ -360,11 +357,6 @@ def train_from_harmonized(
             indent=2,
         )
     )
-    print("="*60)
-    print("✓ Modelo más simple y limpio")
-    print("✓ Basado solo en propiedades físicas observables")
-    print("✓ Alineado al 100% con datasets filtrados")
-    print("="*60)
 
 
 def parse_args():
