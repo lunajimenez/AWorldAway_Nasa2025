@@ -78,7 +78,7 @@
                                     modal.loadComponent({
                                         loader: () =>
                                             import(
-                                                '~/components/common/settings/modal/CommonSettingsModelModal.vue'
+                                                '~/components/common/settings/CommonSettingsModel.vue'
                                             ),
                                         key: 'settings:model',
                                     });
