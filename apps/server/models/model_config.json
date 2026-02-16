@@ -1,5 +1,5 @@
 {
-  "source_csv": "data\\processed\\FinalDataHarmonization.csv",
+  "source_csv": "/Users/apple/Desktop/Programacion/AWorldAway_Nasa2025/packages/analytics/data/processed/KOI_All_Filtrated.csv",
   "numeric_columns": [
     "orbital_period_days",
     "transit_duration_hours",
@@ -8,19 +8,78 @@
     "equilibrium_temperature_K",
     "insolation_flux_Earth",
     "stellar_radius_solar",
-    "stellar_temperature_K"
+    "stellar_temperature_K",
+    "signal_to_noise",
+    "koi_fpflag_nt",
+    "koi_fpflag_ss",
+    "koi_fpflag_co",
+    "koi_fpflag_ec"
   ],
-  "categorical_columns": [
-    "source_mission"
-  ],
+  "categorical_columns": [],
   "dropped_columns": [],
-  "threshold": 0.3433333333333333,
+  "threshold": 0.44333333333333336,
   "metrics": {
-    "ROC_AUC": 0.8889116129237357,
-    "PR_AUC": 0.7774135878898871
+    "ROC_AUC": 0.9831545224855643,
+    "PR_AUC": 0.9561413315411186
   },
   "random_state": 42,
+  "feature_importances": [
+    {
+      "feature": "orbital_period_days",
+      "importance": 0.06067711011930225
+    },
+    {
+      "feature": "transit_duration_hours",
+      "importance": 0.037982955890136935
+    },
+    {
+      "feature": "transit_depth_ppm",
+      "importance": 0.07052797139851462
+    },
+    {
+      "feature": "planet_radius_earth",
+      "importance": 0.15131554259777588
+    },
+    {
+      "feature": "equilibrium_temperature_K",
+      "importance": 0.03964340355011462
+    },
+    {
+      "feature": "insolation_flux_Earth",
+      "importance": 0.051623490186638865
+    },
+    {
+      "feature": "stellar_radius_solar",
+      "importance": 0.031266026494339
+    },
+    {
+      "feature": "stellar_temperature_K",
+      "importance": 0.030967486409991966
+    },
+    {
+      "feature": "signal_to_noise",
+      "importance": 0.2156833592227377
+    },
+    {
+      "feature": "koi_fpflag_nt",
+      "importance": 0.0692764673389869
+    },
+    {
+      "feature": "koi_fpflag_ss",
+      "importance": 0.08804164213773243
+    },
+    {
+      "feature": "koi_fpflag_co",
+      "importance": 0.11296489439861337
+    },
+    {
+      "feature": "koi_fpflag_ec",
+      "importance": 0.0400296502551155
+    }
+  ],
   "test_size": 0.2,
   "auto_drop_ids": true,
-  "exclude_cols": []
+  "exclude_cols": [],
+  "koi_score_excluded": true,
+  "model_version": "v1_without_koi_score_clean"
 }

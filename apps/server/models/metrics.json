@@ -1,11 +1,12 @@
 {
-  "ROC_AUC": 0.8889116129237357,
-  "PR_AUC": 0.7774135878898871,
-  "Best_Threshold_F1": 0.3433333333333333,
-  "Accuracy": 0.8124264532831255,
-  "Macro_F1": 0.7868441653437478,
-  "Positives_in_Test": 1265,
-  "Negatives_in_Test": 2984,
-  "N_features_numeric": 8,
-  "N_features_categorical": 1
+  "ROC_AUC": 0.9831545224855643,
+  "PR_AUC": 0.9561413315411186,
+  "Best_Threshold_F1": 0.44333333333333336,
+  "Accuracy": 0.9461578672242551,
+  "Macro_F1": 0.9338926851133315,
+  "Positives_in_Test": 549,
+  "Negatives_in_Test": 1364,
+  "N_features_numeric": 13,
+  "N_features_categorical": 0,
+  "koi_score_excluded": true
 }

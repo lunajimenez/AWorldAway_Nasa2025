@@ -1,48 +1,50 @@
 {
-  "ROC_AUC": 0.8889116129237357,
-  "PR_AUC": 0.7774135878898871,
-  "Best_Threshold_F1": 0.3433333333333333,
-  "Accuracy": 0.8124264532831255,
-  "Macro_F1": 0.7868441653437478,
+  "ROC_AUC": 0.9831545224855643,
+  "PR_AUC": 0.9561413315411186,
+  "Best_Threshold_F1": 0.44333333333333336,
+  "Accuracy": 0.9461578672242551,
+  "Macro_F1": 0.9338926851133315,
   "Confusion_Matrix": [
     [
-      2462,
-      522
+      1317,
+      47
     ],
     [
-      275,
-      990
+      56,
+      493
     ]
   ],
   "Classification_Report": {
     "NOT_CONFIRMED": {
-      "precision": 0.8995250274022653,
-      "recall": 0.8250670241286864,
-      "f1-score": 0.8606886907883238,
-      "support": 2984.0
+      "precision": 0.9592134013109979,
+      "recall": 0.9655425219941349,
+      "f1-score": 0.9623675557179393,
+      "support": 1364.0
     },
     "CONFIRMED": {
-      "precision": 0.6547619047619048,
-      "recall": 0.782608695652174,
-      "f1-score": 0.7129996398991718,
-      "support": 1265.0
+      "precision": 0.912962962962963,
+      "recall": 0.8979963570127505,
+      "f1-score": 0.9054178145087236,
+      "support": 549.0
     },
-    "accuracy": 0.8124264532831255,
+    "accuracy": 0.9461578672242551,
     "macro avg": {
-      "precision": 0.7771434660820851,
-      "recall": 0.8038378598904301,
-      "f1-score": 0.7868441653437478,
-      "support": 4249.0
+      "precision": 0.9360881821369804,
+      "recall": 0.9317694395034427,
+      "f1-score": 0.9338926851133315,
+      "support": 1913.0
     },
     "weighted avg": {
-      "precision": 0.8266548579176675,
-      "recall": 0.8124264532831255,
-      "f1-score": 0.8167191333925183,
-      "support": 4249.0
+      "precision": 0.9459402749894761,
+      "recall": 0.9461578672242551,
+      "f1-score": 0.9460239028565387,
+      "support": 1913.0
     }
   },
-  "N_features_numeric": 8,
-  "N_features_categorical": 1,
-  "Rows_Total": 21245,
-  "Rows_Labeled": 21245
+  "N_features_numeric": 13,
+  "N_features_categorical": 0,
+  "Rows_Total": 9564,
+  "Rows_Labeled": 9564,
+  "koi_score_excluded": true,
+  "model_notes": "koi_score excluido por decisi\u00f3n basada en experimento (solo +0.32% mejora)"
 }
